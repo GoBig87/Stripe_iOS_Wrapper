@@ -27,7 +27,7 @@ setup(
     author_email='add_later@add)later.com',
     url='https://github.com/GoBig87/Stripe_iOS_Wrapper',
     license='BSD',
-    packages=find_packages(where='src', exclude=['docs', 'tests']),
+    packages=find_packages(where='.', exclude=['docs', 'tests']),
     include_package_data=True,
     zip_safe=False,
     setup_requires=[
