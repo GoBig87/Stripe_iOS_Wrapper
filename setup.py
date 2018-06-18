@@ -11,7 +11,7 @@ def read(file_path):
 
 setup(
     name='stripe_ios',
-    version='master',
+    version='0.1',
     description="A simple stripe ios wrapper",
     classifiers=[
         'Development Status :: 1 - Development',
