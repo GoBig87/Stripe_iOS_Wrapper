@@ -28,11 +28,9 @@ setup(
     url='https://github.com/GoBig87/Stripe_iOS_Wrapper',
     license='BSD',
     packages=find_packages(where='src', exclude=['docs', 'tests']),
-    package_dir={str('.')},
     ext_modules=[
         Extension(
             name=str('stripe_ios'),
-            sources=[str('.')],
             extra_compile_args=['-std=c99'],
             libraries=['stripe_ios'],
         ),
