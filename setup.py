@@ -10,28 +10,37 @@ def read(file_path):
 
 
 setup(
-    name='stripe_ios',
-    version='0.1',
-    description="A simple stripe ios wrapper",
-    classifiers=[
-        'Development Status :: 1 - Development',
-        'Intended Audience :: Developers',
-        'Natural Language :: English',
-        'Operating System :: iOS',
-        'Programming Language :: Objective-C',
-        'Programming Language :: Python :: 2.7',
-        'Topic :: Finacial :: Payment Processing',
-    ],
-    keywords=['stripe', 'payment processing'],
-    author='GoBig87',
-    author_email='add_later@add)later.com',
-    url='https://github.com/GoBig87/Stripe_iOS_Wrapper',
-    license='BSD',
-    packages=find_packages(where='.', exclude=['docs', 'tests']),
-    include_package_data=True,
-    zip_safe=False,
-    setup_requires=[
-        'setuptools',
-    ],
-
-)
+      name='stripe_ios',
+      version='0.1',
+      description="A simple stripe ios wrapper",
+      classifiers=[
+                   'Development Status :: 1 - Development',
+                   'Intended Audience :: Developers',
+                   'Natural Language :: English',
+                   'Operating System :: iOS',
+                   'Programming Language :: Objective-C',
+                   'Programming Language :: Python :: 2.7',
+                   'Topic :: Finacial :: Payment Processing',
+                   ],
+      keywords=['stripe', 'payment processing'],
+      author='GoBig87',
+      author_email='add_later@add)later.com',
+      url='https://github.com/GoBig87/Stripe_iOS_Wrapper',
+      license='BSD',
+      packages=find_packages(where='.', exclude=['docs', 'tests']),
+      ext_modules=[
+                   Extension(
+                             name=str('stripe_ios'),
+                             sources=[str('stripe_ios.c')],
+                             extra_compile_args=['-std=c99'],
+                             libraries=['stripe'],
+                             optional=os.environ.get('READTHEDOCS', False),  # Do not build on Read the Docs
+                             ),
+                   ],
+      include_package_data=True,
+      zip_safe=False,
+      setup_requires=[
+                      'setuptools',
+                      ],
+      
+      )
