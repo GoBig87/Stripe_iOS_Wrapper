@@ -42,20 +42,6 @@ def merge(d1, *args):
 def expand(root, *args):
     return join(root, *args)
 
-# def get_modulename_from_file(filename):
-#     print 'debug1'
-#     print filename
-#     filename = filename.replace(sep, '/')
-#     pyx = '.'.join(filename.split('.')[:-1])
-#     pyxl = pyx.split('/')
-#     while pyxl[0] != 'stripe_ios':
-#         pyxl.pop(0)
-#     if pyxl[1] == 'stripe_ios':
-#         pyxl.pop(0)
-#     print 'debug2'
-#     print '.'.join(pyxl)
-#     return '.'.join(pyxl)
-
 class CythonExtension(Extension):
 
     def __init__(self, *args, **kwargs):
