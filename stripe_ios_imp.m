@@ -34,7 +34,7 @@ const char* StripWrapper::retrieveToken(int cardNumber, int expMonth, int expYea
 // C-like API for easier interaction with Cython
 //
 
-#include "stripe_ios.h"
+#include "stripe_ios_imp.h"
 
 strip_wrapper_t stripe_wrapper_init() {
     return new StripWrapper();
