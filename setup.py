@@ -14,7 +14,7 @@ def read(file_path):
 def determine_base_flags():
     flags = {
         'libraries': [],
-        'include_dirs': [join(src_path, 'stripe', 'include')],
+        'include_dirs': [join(src_path, 'build')],
         'library_dirs': [],
         'extra_link_args': [],
         'extra_compile_args': []}
@@ -40,16 +40,20 @@ def merge(d1, *args):
     return d1
 
 def expand(root, *args):
-    return join(root, 'stripe', *args)
+    return join(root, 'stripe_ios', *args)
 
 def get_modulename_from_file(filename):
+    print 'debug1'
+    print filename
     filename = filename.replace(sep, '/')
     pyx = '.'.join(filename.split('.')[:-1])
     pyxl = pyx.split('/')
-    while pyxl[0] != 'stripe':
+    while pyxl[0] != 'stripe_ios':
         pyxl.pop(0)
-    if pyxl[1] == 'stripe':
+    if pyxl[1] == 'stripe_ios':
         pyxl.pop(0)
+    print 'debug2'
+    print '.'.join(pyxl)
     return '.'.join(pyxl)
 
 class CythonExtension(Extension):
@@ -85,7 +89,7 @@ sources = {}
 src_path = build_path = dirname(__file__)
 base_flags = determine_base_flags()
 osx_flags = {
-    'extra_link_args': ['-framework', 'Stripe'],
+    'extra_link_args': ['-framework', 'stripe_ios'],
     'extra_compile_args': ['-ObjC++'],
     'depends': ['stripe_ios_imp.m']}
 sources['stripe_ios.pyx'] = merge(base_flags, osx_flags)
