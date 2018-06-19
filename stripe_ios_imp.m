@@ -1,3 +1,4 @@
+#import <Foundation/Foundation.h>
 #import <Stripe/STPCardParams.h>
 #import <Stripe/STPAPIClient.h>
 #import <Stripe/STPToken.h>
