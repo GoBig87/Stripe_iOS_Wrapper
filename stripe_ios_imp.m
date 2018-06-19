@@ -4,6 +4,7 @@
 #import "Stripe/STPToken.h"
 #import <Foundation/NSError.h>
 #import <Foundation/NSString.h>
+#import <Foundation/UTF8String.h>
 
 class StripWrapper {
 public:
@@ -27,7 +28,7 @@ NSString* StripWrapper::retrieveToken(NSString* cardNumber, int expMonth, int ex
             return [error localizedDescription];
         }
         else{
-            return [token.tokenId UTF8String];
+            return token.tokenId;
         }
     }];
 }
