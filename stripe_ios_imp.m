@@ -16,14 +16,14 @@ StripWrapper::StripWrapper(){
 
 void StripWrapper::retrieveToken(const char* cardNumber, int expMonth, int expYear, const char* cvc) {
 
-    NScardNumber = [NSString stringWithUTF8String:cardNumber];
-    NScvc = [NSString stringWithUTF8String:cvc];
+    cardNumberNS = [NSString stringWithUTF8String:cardNumber];
+    cvcNS = [NSString stringWithUTF8String:cvc];
 
     STPCardParams *cardParams = [[STPCardParams alloc] init];
-    cardParams.number = NScardNumber;
+    cardParams.number = cardNumberNS;
     cardParams.expMonth = expMonth;
     cardParams.expYear = expYear;
-    cardParams.cvc = cvc;
+    cardParams.cvc = cvcNS;
 
     [[STPAPIClient sharedClient] createTokenWithCard:cardParams completion:^(STPToken *token, NSError *error) {
         if (token == nil || error != nil) {
