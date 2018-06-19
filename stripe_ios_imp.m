@@ -24,12 +24,10 @@ NSString* StripWrapper::retrieveToken(NSString* cardNumber, int expMonth, int ex
 
     [[STPAPIClient sharedClient] createTokenWithCard:cardParams completion:^(STPToken *token, NSError *error) {
         if (token == nil || error != nil) {
-            NSString* Error = [error localizedDescription];
-            return Error;
+            return [error localizedDescription];
         }
         else{
-            NSString* tokenString = [token.tokenId UTF8String];
-            return tokenString;
+            return [token.tokenId UTF8String];
         }
     }];
 }
