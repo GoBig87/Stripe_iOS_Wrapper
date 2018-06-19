@@ -72,7 +72,7 @@ class CythonExtension(Extension):
 def get_extensions_from_sources(sources):
     ext_modules = []
     for pyx, flags in sources.items():
-        pyx = expand(src_path, pyx)
+        pyx = expand(src_path)
         depends = [expand(src_path, x) for x in flags.pop('depends', [])]
         f_depends = [x for x in depends if x.rsplit('.', 1)[-1] in ('m')]
         c_depends = [expand(src_path, x) for x in flags.pop('c_depends', [])]
