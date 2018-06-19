@@ -14,7 +14,7 @@ def read(file_path):
 def determine_base_flags():
     flags = {
         'libraries': [],
-        'include_dirs': [join(src_path, 'build')],
+        'include_dirs': [join(src_path, 'dist','Frameworks','Stripe.framework','Headers')],
         'library_dirs': [],
         'extra_link_args': [],
         'extra_compile_args': []}
@@ -75,7 +75,7 @@ sources = {}
 src_path = build_path = dirname(__file__)
 base_flags = determine_base_flags()
 osx_flags = {
-    'extra_link_args': ['-F/Library/Frameworks','-framework', 'Stripe'],
+    'extra_link_args': ['-framework', 'Stripe'],
     'extra_compile_args': ['-ObjC++'],
     'depends': ['stripe_ios_imp.m']}
 sources['stripe_ios.pyx'] = merge(base_flags, osx_flags)
