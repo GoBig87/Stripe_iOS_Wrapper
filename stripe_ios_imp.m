@@ -9,7 +9,7 @@ class StripWrapper {
 public:
     StripWrapper();
     ~StripWrapper();
-    const char* retrieveToken(NSString cardNumber, int expMonth, int expYear, NSString cvc);
+    const char* retrieveToken(int cardNumber, int expMonth, int expYear, int cvc);
 }
 StripWrapper::StripWrapper(){
 }
