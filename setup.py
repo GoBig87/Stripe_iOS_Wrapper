@@ -13,7 +13,7 @@ def read(file_path):
 
 def determine_base_flags():
     flags = {
-        'libraries': [],
+        'libraries': ['libStripe'],
         'include_dirs': [join(src_path, 'dist','Frameworks','Stripe.framework','Headers')],
         'library_dirs': [],
         'extra_link_args': [],
