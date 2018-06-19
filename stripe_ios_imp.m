@@ -9,18 +9,18 @@ class StripWrapper {
 public:
     StripWrapper();
     ~StripWrapper();
-    const char* retrieveToken(int cardNumber, int expMonth, int expYear, int cvc);
-}
+    const char* retrieveToken(NSString cardNumber, int expMonth, int expYear, NSString cvc);
+};
 StripWrapper::StripWrapper(){
 }
 
-const char* StripWrapper::retrieveToken(int cardNumber, int expMonth, int expYear, int cvc) {
+const char* StripWrapper::retrieveToken(NSString cardNumber, int expMonth, int expYear, NSString cvc) {
 
     STPCardParams *cardParams = [[STPCardParams alloc] init];
-    cardParams.number = cardNumber;
+    cardParams.number = @cardNumber;
     cardParams.expMonth = expMonth;
     cardParams.expYear = expYear;
-    cardParams.cvc = cvc;
+    cardParams.cvc = @cvc;
 
     [[STPAPIClient sharedClient] createTokenWithCard:cardParams completion:^(STPToken *token, NSError *error) {
         if (token == nil || error != nil) {
