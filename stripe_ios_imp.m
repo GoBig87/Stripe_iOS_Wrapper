@@ -16,8 +16,8 @@ StripWrapper::StripWrapper(){
 
 void StripWrapper::retrieveToken(const char* cardNumber, int expMonth, int expYear, const char* cvc) {
 
-    NSString NScardNumber = [NSString stringWithUTF8String:cardNumber];
-    NSString NScvc = [NSString stringWithUTF8String:cvc];
+    NSString* NScardNumber = [NSString stringWithUTF8String:cardNumber];
+    NSString* NScvc = [NSString stringWithUTF8String:cvc];
 
     STPCardParams *cardParams = [[STPCardParams alloc] init];
     cardParams.number = NScardNumber;
