@@ -40,7 +40,7 @@ def merge(d1, *args):
     return d1
 
 def expand(root, *args):
-    return join(root, 'stripe_ios', *args)
+    return join(root, *args)
 
 # def get_modulename_from_file(filename):
 #     print 'debug1'
