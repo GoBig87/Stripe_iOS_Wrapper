@@ -89,13 +89,12 @@ sources = {}
 src_path = build_path = dirname(__file__)
 base_flags = determine_base_flags()
 osx_flags = {
-    'extra_link_args': ['-framework', 'stripe_ios'],
+    'extra_link_args': ['-framework', 'Stripe'],
     'extra_compile_args': ['-ObjC++'],
     'depends': ['stripe_ios_imp.m']}
 sources['stripe_ios.pyx'] = merge(base_flags, osx_flags)
 
 ext_modules = get_extensions_from_sources(sources)
-print ext_modules
 
 setup(
       name='stripe_ios',
