@@ -9,12 +9,12 @@ class StripWrapper {
 public:
     StripWrapper();
     ~StripWrapper();
-    const char* retrieveToken(NSString* cardNumber, int expMonth, int expYear, NSString* cvc);
+    NSString* retrieveToken(NSString* cardNumber, int expMonth, int expYear, NSString* cvc);
 };
 StripWrapper::StripWrapper(){
 }
 
-const char* StripWrapper::retrieveToken(NSString* cardNumber, int expMonth, int expYear, NSString* cvc) {
+NSString* StripWrapper::retrieveToken(NSString* cardNumber, int expMonth, int expYear, NSString* cvc) {
 
     STPCardParams *cardParams = [[STPCardParams alloc] init];
     cardParams.number = cardNumber;
@@ -24,13 +24,11 @@ const char* StripWrapper::retrieveToken(NSString* cardNumber, int expMonth, int 
 
     [[STPAPIClient sharedClient] createTokenWithCard:cardParams completion:^(STPToken *token, NSError *error) {
         if (token == nil || error != nil) {
-            char charArray = '0000000000'
-            charArray = [[error localizedDescription] UTF8String];
+            NSString Error = [error localizedDescription];
             return charArray;
         }
         else{
-            char charArray = '0000000000'
-            charArray[] = [token.tokenId UTF8String];
+            NSString tokenString = [token.tokenId UTF8String];
             return charArray;
         }
     }];
