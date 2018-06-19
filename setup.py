@@ -42,19 +42,19 @@ def merge(d1, *args):
 def expand(root, *args):
     return join(root, 'stripe_ios', *args)
 
-def get_modulename_from_file(filename):
-    print 'debug1'
-    print filename
-    filename = filename.replace(sep, '/')
-    pyx = '.'.join(filename.split('.')[:-1])
-    pyxl = pyx.split('/')
-    while pyxl[0] != 'stripe_ios':
-        pyxl.pop(0)
-    if pyxl[1] == 'stripe_ios':
-        pyxl.pop(0)
-    print 'debug2'
-    print '.'.join(pyxl)
-    return '.'.join(pyxl)
+# def get_modulename_from_file(filename):
+#     print 'debug1'
+#     print filename
+#     filename = filename.replace(sep, '/')
+#     pyx = '.'.join(filename.split('.')[:-1])
+#     pyxl = pyx.split('/')
+#     while pyxl[0] != 'stripe_ios':
+#         pyxl.pop(0)
+#     if pyxl[1] == 'stripe_ios':
+#         pyxl.pop(0)
+#     print 'debug2'
+#     print '.'.join(pyxl)
+#     return '.'.join(pyxl)
 
 class CythonExtension(Extension):
 
@@ -72,11 +72,11 @@ class CythonExtension(Extension):
 def get_extensions_from_sources(sources):
     ext_modules = []
     for pyx, flags in sources.items():
-        pyx = expand(src_path)
+        pyx = expand(src_path,pyx)
         depends = [expand(src_path, x) for x in flags.pop('depends', [])]
         f_depends = [x for x in depends if x.rsplit('.', 1)[-1] in ('m')]
         c_depends = [expand(src_path, x) for x in flags.pop('c_depends', [])]
-        module_name = get_modulename_from_file(pyx)
+        module_name = 'stripe_ios'
         flags_clean = {'depends': depends}
         for key, value in flags.items():
             if len(value):
