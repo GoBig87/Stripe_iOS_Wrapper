@@ -93,7 +93,7 @@ setup(
                    'Operating System :: iOS',
                    'Programming Language :: Objective-C',
                    'Programming Language :: Python :: 2.7',
-                   'Topic :: Finacial :: Payment Processing',
+                   'Topic :: Payment Processing',
                    ],
       keywords=['stripe', 'payment processing'],
       author='GoBig87',
