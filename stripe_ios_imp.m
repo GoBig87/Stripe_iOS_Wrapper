@@ -9,12 +9,12 @@ class StripWrapper {
 public:
     StripWrapper();
     ~StripWrapper();
-    void retrieveToken(const char* cardNumber, int expMonth, int expYear, const char* cvc);
+    char* retrieveToken(const char* cardNumber, int expMonth, int expYear, const char* cvc);
 };
 StripWrapper::StripWrapper(){
 }
 
-void StripWrapper::retrieveToken(const char* cardNumber, int expMonth, int expYear, const char* cvc) {
+char* StripWrapper::retrieveToken(const char* cardNumber, int expMonth, int expYear, const char* cvc) {
 
     NSString* NScardNumber = [NSString stringWithUTF8String:cardNumber];
     NSString* NScvc = [NSString stringWithUTF8String:cvc];
@@ -27,12 +27,13 @@ void StripWrapper::retrieveToken(const char* cardNumber, int expMonth, int expYe
 
     [[STPAPIClient sharedClient] createTokenWithCard:cardParams completion:^(STPToken *token, NSError *error) {
         if (token == nil || error != nil) {
-            [error localizedDescription];
-            return;
+            NSString ErrorString = [error localizedDescription];
+            char *ErrorChar = [ErrorString UTF8String];
+            return ErrorChar;
         }
         else{
-            token.tokenId;
-            return;
+            char *tokenChar = [token.tokenId UTF8String];
+            return tokenChar;
         }
     }];
 }
@@ -46,6 +47,6 @@ void StripWrapper::retrieveToken(const char* cardNumber, int expMonth, int expYe
 strip_wrapper_t stripe_wrapper_init() {
     return new StripWrapper();
 }
-void stripe_get_token(strip_wrapper_t stripe, const char* cardNumber, int expMonth, int expYear, const char* cvc){
+char* stripe_get_token(strip_wrapper_t stripe, const char* cardNumber, int expMonth, int expYear, const char* cvc){
     return ((StripWrapper *)stripe)->retrieveToken(cardNumber,expMonth,expYear,cvc);
 }
