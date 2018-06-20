@@ -25,7 +25,7 @@ const char* StripWrapper::retrieveToken(const char* cardNumber, int expMonth, in
     cardParams.expYear = expYear;
     cardParams.cvc = NScvc;
 
-    char* returnString;
+    __block char* returnString = '';
 
     [[STPAPIClient sharedClient] createTokenWithCard:cardParams completion:^(STPToken *token,NSError *error) {
         if (token == nil || error != nil) {
@@ -35,7 +35,7 @@ const char* StripWrapper::retrieveToken(const char* cardNumber, int expMonth, in
             returnString =  [token.tokenId UTF8String];
         }
     }];
-    return returnString
+    return returnString;
 }
 
 //
