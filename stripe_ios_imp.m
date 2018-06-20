@@ -25,14 +25,17 @@ const char* StripWrapper::retrieveToken(const char* cardNumber, int expMonth, in
     cardParams.expYear = expYear;
     cardParams.cvc = NScvc;
 
-    return [[STPAPIClient sharedClient] createTokenWithCard:cardParams completion:^(STPToken *token,NSError *error) {
+    char* returnString;
+
+    [[STPAPIClient sharedClient] createTokenWithCard:cardParams completion:^(STPToken *token,NSError *error) {
         if (token == nil || error != nil) {
-            return [error.localizedDescription UTF8String];
+            returnString = [error.localizedDescription UTF8String];
         }
         else{
-            return [token.tokenId UTF8String];
+            returnString =  [token.tokenId UTF8String];
         }
     }];
+    return returnString
 }
 
 //
