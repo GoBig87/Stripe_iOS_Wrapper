@@ -9,7 +9,7 @@ class StripWrapper {
 public:
     StripWrapper();
     ~StripWrapper();
-    const char* retrieveToken(const char* cardNumber, int expMonth, int expYear, const char* cvc);
+    char* retrieveToken(const char* cardNumber, int expMonth, int expYear, const char* cvc);
 };
 StripWrapper::StripWrapper(){
 }
