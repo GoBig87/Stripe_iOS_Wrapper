@@ -76,9 +76,10 @@ src_path = build_path = dirname(__file__)
 base_flags = determine_base_flags()
 osx_flags = {
     'extra_link_args': ['-framework', 'Stripe'],
-    'extra_compile_args': ['-ObjC++'],
+    'extra_compile_args': ['-ObjC'],
     'depends': ['stripe_ios_imp.m','Stripe/STPCardParams.m','Stripe/STPAPIClient.m',
-                'Stripe/STPToken.m','Stripe/StripeError.m']}
+                'Stripe/STPToken.m', 'STPCard+Private.m','Stripe/StripeError.m',
+                'STPCardValidator.m']}
 sources['stripe_ios.pyx'] = merge(base_flags, osx_flags)
 
 ext_modules = get_extensions_from_sources(sources)
