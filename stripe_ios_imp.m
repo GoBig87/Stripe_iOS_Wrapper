@@ -5,14 +5,14 @@
 #import <Foundation/NSError.h>
 #import <Foundation/NSString.h>
 
-class StripWrapper {
+Class StripWrapper {
 public:
     StripWrapper();
     ~StripWrapper();
     const char* retrieveToken(const char* cardNumber, int expMonth, int expYear, const char* cvc);
 };
 StripWrapper::StripWrapper(){
-}
+};
 
 const char* StripWrapper::retrieveToken(const char* cardNumber, int expMonth, int expYear, const char* cvc) {
 
@@ -36,7 +36,7 @@ const char* StripWrapper::retrieveToken(const char* cardNumber, int expMonth, in
         }
     }];
     return returnString;
-}
+};
 
 //
 // C-like API for easier interaction with Cython
@@ -46,7 +46,7 @@ const char* StripWrapper::retrieveToken(const char* cardNumber, int expMonth, in
 
 strip_wrapper_t stripe_wrapper_init() {
     return new StripWrapper();
-}
+};
 const char* stripe_get_token(strip_wrapper_t stripe, const char* cardNumber, int expMonth, int expYear, const char* cvc){
     return ((StripWrapper *)stripe)->retrieveToken(cardNumber,expMonth,expYear,cvc);
-}
+};

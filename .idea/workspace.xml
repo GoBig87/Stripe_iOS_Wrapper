@@ -81,6 +81,9 @@
       <find>determine_base_flags</find>
       <find>NSString</find>
       <find>STPTokenCompletionBlock</find>
+      <find>STPErrorCode</find>
+      <find>NSInteger</find>
+      <find>StripeDomain</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
