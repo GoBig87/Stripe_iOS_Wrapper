@@ -4,7 +4,7 @@ __all__ = ['StripeWrapper']
 cdef extern from "stripe_ios_imp.h":
     ctypedef void *strip_wrapper_t
     strip_wrapper_t stripe_wrapper_init()
-    const char* stripe_get_token(strip_wrapper_t stripe, const char* cardNumber, int expMonth, int expYear,const char* cvc)
+    char* stripe_get_token(strip_wrapper_t stripe, const char* cardNumber, int expMonth, int expYear,const char* cvc)
 
 cdef class _Stripe:
     cdef strip_wrapper_t stripe
