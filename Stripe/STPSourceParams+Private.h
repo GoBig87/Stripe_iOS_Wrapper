@@ -6,7 +6,7 @@
 //  Copyright © 2017 Stripe, Inc. All rights reserved.
 //
 
-#import 'Stripe.h'
+#import "Stripe.h"
 
 @interface STPSourceParams ()
 
