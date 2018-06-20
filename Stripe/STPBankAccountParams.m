@@ -9,11 +9,11 @@
 #import "STPBankAccountParams.h"
 #import "STPBankAccountParams+Private.h"
 
-#import "FauxPasAnnotations.h"
+#define FAUXPAS_IGNORED_ON_LINE(...)
 
 @interface STPBankAccountParams ()
 
-// See STPBankAccountParams+Private.h
+@property (nonatomic, readonly) NSString *accountHolderTypeString;
 
 @end
 
@@ -51,7 +51,7 @@
     NSString *key = [string lowercaseString];
     NSNumber *accountHolderTypeNumber = [self stringToAccountHolderTypeMapping][key];
 
-    if (accountHolderTypeNumber != nil) {
+    if (accountHolderTypeNumber) {
         return (STPBankAccountHolderType)[accountHolderTypeNumber integerValue];
     }
 
@@ -93,12 +93,12 @@
 
 + (NSDictionary *)propertyNamesToFormFieldNamesMapping {
     return @{
-             NSStringFromSelector(@selector(accountNumber)): @"account_number",
-             NSStringFromSelector(@selector(routingNumber)): @"routing_number",
-             NSStringFromSelector(@selector(country)): @"country",
-             NSStringFromSelector(@selector(currency)): @"currency",
-             NSStringFromSelector(@selector(accountHolderName)): @"account_holder_name",
-             NSStringFromSelector(@selector(accountHolderTypeString)): @"account_holder_type",
+             @"accountNumber": @"account_number",
+             @"routingNumber": @"routing_number",
+             @"country": @"country",
+             @"currency": @"currency",
+             @"accountHolderName": @"account_holder_name",
+             @"accountHolderTypeString": @"account_holder_type",
              };
 }
 

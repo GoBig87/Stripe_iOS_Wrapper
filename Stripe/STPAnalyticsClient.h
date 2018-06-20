@@ -29,4 +29,10 @@
 - (void)logSourceCreationAttemptWithConfiguration:(STPPaymentConfiguration *)configuration
                                        sourceType:(NSString *)sourceType;
 
+- (void)logRUMWithToken:(STPToken *)token
+          configuration:(STPPaymentConfiguration *)config
+               response:(NSHTTPURLResponse *)response
+                  start:(NSDate *)startTime
+                    end:(NSDate *)endTime;
+
 @end

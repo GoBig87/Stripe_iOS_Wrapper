@@ -115,17 +115,19 @@
 #endif
 }
 
++ (NSNumber *)timestampWithDate:(NSDate *)date {
+    return @((NSInteger)([date timeIntervalSince1970]*1000));
+}
+
 + (NSString *)tokenTypeFromParameters:(NSDictionary *)parameters {
-    NSArray *parameterKeys = parameters.allKeys;
-    // these are currently mutually exclusive, so we can just run through and find the first match
-    NSArray *tokenTypes = @[@"account", @"bank_account", @"card", @"pii"];
-    for (NSString *type in tokenTypes) {
-        if ([parameterKeys containsObject:type]) {
+    if ([parameters.allKeys count] == 1) {
+        NSArray *validTypes = @[@"bank_account", @"card", @"pii"];
+        NSString *type = [parameters.allKeys firstObject];
+        if ([validTypes containsObject:type]) {
             return type;
         }
     }
-    // We want to use a different value for pk_token, that's why it's not above
-    if ([parameterKeys containsObject:@"pk_token"]) {
+    if ([parameters.allKeys containsObject:@"pk_token"]) {
         return @"apple_pay";
     }
     return nil;
@@ -213,6 +215,36 @@
     [self logPayload:payload];
 }
 
+- (void)logRUMWithToken:(STPToken *)token
+          configuration:(STPPaymentConfiguration *)configuration
+               response:(NSHTTPURLResponse *)response
+                  start:(NSDate *)startTime
+                    end:(NSDate *)endTime {
+    NSString *tokenTypeString = @"unknown";
+    if (token.bankAccount) {
+        tokenTypeString = @"bank_account";
+    } else if (token.card) {
+        if (token.card.isApplePayCard) {
+            tokenTypeString = @"apple_pay";
+        } else {
+            tokenTypeString = @"card";
+        }
+    }
+    NSNumber *start = [[self class] timestampWithDate:startTime];
+    NSNumber *end = [[self class] timestampWithDate:endTime];
+    NSMutableDictionary *payload = [self.class commonPayload];
+    [payload addEntriesFromDictionary:@{
+                                        @"event": @"rum.stripeios",
+                                        @"tokenType": tokenTypeString,
+                                        @"url": response.URL.absoluteString ?: @"unknown",
+                                        @"status": @(response.statusCode),
+                                        @"publishable_key": configuration.publishableKey ?: @"unknown",
+                                        @"start": start,
+                                        @"end": end,
+                                        }];
+    [self logPayload:payload];
+}
+
 + (NSMutableDictionary *)commonPayload {
     NSMutableDictionary *payload = [NSMutableDictionary dictionary];
     payload[@"bindings_version"] = STPSDKVersion;
@@ -251,20 +283,18 @@
             dictionary[@"required_billing_address_fields"] = @"zip";
         case STPBillingAddressFieldsFull:
             dictionary[@"required_billing_address_fields"] = @"full";
-        case STPBillingAddressFieldsName:
-            dictionary[@"required_billing_address_fields"] = @"name";
     }
     NSMutableArray<NSString *> *shippingFields = [NSMutableArray new];
-    if ([configuration.requiredShippingAddressFields containsObject:STPContactFieldName]) {
+    if (configuration.requiredShippingAddressFields & PKAddressFieldName) {
         [shippingFields addObject:@"name"];
     }
-    if ([configuration.requiredShippingAddressFields containsObject:STPContactFieldEmailAddress]) {
+    if (configuration.requiredShippingAddressFields & PKAddressFieldEmail) {
         [shippingFields addObject:@"email"];
     }
-    if ([configuration.requiredShippingAddressFields containsObject:STPContactFieldPostalAddress]) {
+    if (configuration.requiredShippingAddressFields & PKAddressFieldPostalAddress) {
         [shippingFields addObject:@"address"];
     }
-    if ([configuration.requiredShippingAddressFields containsObject:STPContactFieldPhoneNumber]) {
+    if (configuration.requiredShippingAddressFields & PKAddressFieldPhone) {
         [shippingFields addObject:@"phone"];
     }
     if ([shippingFields count] == 0) {

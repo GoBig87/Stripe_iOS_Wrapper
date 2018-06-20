@@ -10,7 +10,7 @@
 
 @interface STPPaymentConfiguration ()
 
-@property (nonatomic, assign, readonly) BOOL applePayEnabled;
+@property(nonatomic, readonly)BOOL applePayEnabled;
 
 @end
 

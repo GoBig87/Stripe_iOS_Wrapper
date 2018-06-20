@@ -1,5 +1,5 @@
 //
-//  NSArray+Stripe.h
+//  NSArray+Stripe_BoundSafe.h
 //  Stripe
 //
 //  Created by Jack Flintermann on 1/19/16.
@@ -8,15 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
-@interface NSArray (Stripe)
+@interface NSArray (Stripe_BoundSafe)
 
 - (nullable id)stp_boundSafeObjectAtIndex:(NSInteger)index;
-- (NSArray *)stp_arrayByRemovingNulls;
 
 @end
 
-NS_ASSUME_NONNULL_END
-
-void linkNSArrayCategory(void);
+void linkNSArrayBoundSafeCategory(void);

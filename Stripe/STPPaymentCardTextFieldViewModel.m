@@ -7,9 +7,9 @@
 //
 
 #import "STPPaymentCardTextFieldViewModel.h"
-
 #import "NSString+Stripe.h"
-#import "STPPostalCodeValidator.h"
+
+#define FAUXPAS_IGNORED_IN_METHOD(...)
 
 @implementation STPPaymentCardTextFieldViewModel
 
@@ -56,19 +56,6 @@
     _cvc = [[STPCardValidator sanitizedNumericStringForString:cvc] stp_safeSubstringToIndex:maxLength];
 }
 
-- (void)setPostalCode:(NSString *)postalCode {
-    _postalCode = [STPPostalCodeValidator formattedSanitizedPostalCodeFromString:postalCode
-                                                                     countryCode:self.postalCodeCountryCode
-                                                                           usage:STPPostalCodeIntendedUsageBillingAddress];
-}
-
-- (void)setPostalCodeCountryCode:(NSString *)postalCodeCountryCode {
-    _postalCodeCountryCode = postalCodeCountryCode;
-    _postalCode = [STPPostalCodeValidator formattedSanitizedPostalCodeFromString:self.postalCode
-                                                                     countryCode:postalCodeCountryCode
-                                                                           usage:STPPostalCodeIntendedUsageBillingAddress];
-}
-
 - (STPCardBrand)brand {
     return [STPCardValidator brandForNumber:self.cardNumber];
 }
@@ -92,22 +79,27 @@
         }
         case STPCardFieldTypeCVC:
             return [STPCardValidator validationStateForCVC:self.cvc cardBrand:self.brand];
-        case STPCardFieldTypePostalCode:
-            return [STPPostalCodeValidator validationStateForPostalCode:self.postalCode
-                                                            countryCode:self.postalCodeCountryCode];
     }
 }
 
 - (BOOL)isValid {
-    return ([self validationStateForField:STPCardFieldTypeNumber] == STPCardValidationStateValid
-            && [self validationStateForField:STPCardFieldTypeExpiration] == STPCardValidationStateValid
-            && [self validationStateForField:STPCardFieldTypeCVC] == STPCardValidationStateValid
-            && (!self.postalCodeRequired
-                || [self validationStateForField:STPCardFieldTypePostalCode] == STPCardValidationStateValid));
+    return ([self validationStateForField:STPCardFieldTypeNumber] == STPCardValidationStateValid &&
+            [self validationStateForField:STPCardFieldTypeExpiration] == STPCardValidationStateValid &&
+            [self validationStateForField:STPCardFieldTypeCVC] == STPCardValidationStateValid);
 }
 
 - (NSString *)defaultPlaceholder {
     return @"4242424242424242";
+}
+
+- (NSString *)numberWithoutLastDigits {
+    NSUInteger length = [STPCardValidator fragmentLengthForCardBrand:[STPCardValidator brandForNumber:self.cardNumber]];
+    NSUInteger toIndex = self.cardNumber.length - length;
+    
+    return (toIndex < self.cardNumber.length) ?
+        [self.cardNumber substringToIndex:toIndex] :
+        [self.defaultPlaceholder stp_safeSubstringToIndex:[self defaultPlaceholder].length - length];
+
 }
 
 + (NSSet<NSString *> *)keyPathsForValuesAffectingValid {
@@ -116,10 +108,7 @@
                                  NSStringFromSelector(@selector(expirationMonth)),
                                  NSStringFromSelector(@selector(expirationYear)),
                                  NSStringFromSelector(@selector(cvc)),
-                                 NSStringFromSelector(@selector(brand)),
-                                 NSStringFromSelector(@selector(postalCode)),
-                                 NSStringFromSelector(@selector(postalCodeRequired)),
-                                 NSStringFromSelector(@selector(postalCodeCountryCode)),
+                                 NSStringFromSelector(@selector(brand))
                                  ]];
 }
 

@@ -8,29 +8,28 @@
 
 #import "STPAPIRequest.h"
 
-#import "NSError+Stripe.h"
 #import "NSMutableURLRequest+Stripe.h"
-#import "STPAPIClient.h"
-#import "STPAPIClient+Private.h"
-#import "STPDispatchFunctions.h"
 #import "STPInternalAPIResponseDecodable.h"
+#import "STPAPIClient+Private.h"
+#import "STPAPIClient.h"
+#import "STPCard+Private.h"
+#import "STPDispatchFunctions.h"
+#import "STPFormEncoder.h"
+#import "STPSource+Private.h"
+#import "StripeError.h"
 
 @implementation STPAPIRequest
-
-static NSString * const HTTPMethodPOST = @"POST";
-static NSString * const HTTPMethodGET = @"GET";
-static NSString * const HTTPMethodDELETE = @"DELETE";
-
-static NSString * const JSONKeyObject = @"object";
-
-#pragma mark - POST
 
 + (NSURLSessionDataTask *)postWithAPIClient:(STPAPIClient *)apiClient
                                    endpoint:(NSString *)endpoint
                                  parameters:(NSDictionary *)parameters
                                deserializer:(id<STPAPIResponseDecodable>)deserializer
                                  completion:(STPAPIResponseBlock)completion {
-    return [self postWithAPIClient:apiClient endpoint:endpoint parameters:parameters deserializers:@[deserializer] completion:completion];
+    return [self postWithAPIClient:apiClient
+                          endpoint:endpoint
+                        parameters:parameters
+                     deserializers:@[deserializer]
+                        completion:completion];
 }
 
 + (NSURLSessionDataTask *)postWithAPIClient:(STPAPIClient *)apiClient
@@ -38,153 +37,92 @@ static NSString * const JSONKeyObject = @"object";
                                  parameters:(NSDictionary *)parameters
                               deserializers:(NSArray<id<STPAPIResponseDecodable>>*)deserializers
                                  completion:(STPAPIResponseBlock)completion {
-    // Build url
     NSURL *url = [apiClient.apiURL URLByAppendingPathComponent:endpoint];
-
-    // Setup request
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
-    request.HTTPMethod = HTTPMethodPOST;
-    [request stp_setFormPayload:parameters];
+    request.HTTPMethod = @"POST";
+    NSString *query = [STPFormEncoder queryStringFromParameters:parameters];
+    request.HTTPBody = [query dataUsingEncoding:NSUTF8StringEncoding];
 
-    // Perform request
-    NSURLSessionDataTask *task = [apiClient.urlSession dataTaskWithRequest:request completionHandler:^(NSData *body, NSURLResponse *response, NSError *error) {
-        [[self class] parseResponse:response body:body error:error deserializers:deserializers completion:completion];
+    NSURLSessionDataTask *task = [apiClient.urlSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable body, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        [[self class] parseResponse:response
+                               body:body
+                              error:error
+                      deserializers:deserializers
+                         completion:completion];
     }];
     [task resume];
-
     return task;
 }
-
-#pragma mark - GET
 
 + (NSURLSessionDataTask *)getWithAPIClient:(STPAPIClient *)apiClient
                                   endpoint:(NSString *)endpoint
                                 parameters:(NSDictionary *)parameters
                               deserializer:(id<STPAPIResponseDecodable>)deserializer
                                 completion:(STPAPIResponseBlock)completion {
-    // Build url
-    NSURL *url = [apiClient.apiURL URLByAppendingPathComponent:endpoint];
 
-    // Setup request
+    NSURL *url = [apiClient.apiURL URLByAppendingPathComponent:endpoint];
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
     [request stp_addParametersToURL:parameters];
-    request.HTTPMethod = HTTPMethodGET;
+    request.HTTPMethod = @"GET";
 
-    // Perform request
-    NSURLSessionDataTask *task = [apiClient.urlSession dataTaskWithRequest:request completionHandler:^(NSData *body, NSURLResponse *response, NSError *error) {
-        [[self class] parseResponse:response body:body error:error deserializers:@[deserializer] completion:completion];
+    NSURLSessionDataTask *task = [apiClient.urlSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable body, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        [[self class] parseResponse:response
+                               body:body
+                              error:error
+                      deserializers:@[deserializer]
+                         completion:completion];
     }];
     [task resume];
-
     return task;
 }
-
-#pragma mark - DELETE
-
-+ (NSURLSessionDataTask *)deleteWithAPIClient:(STPAPIClient *)apiClient
-                                     endpoint:(NSString *)endpoint
-                                   parameters:(NSDictionary *)parameters
-                                 deserializer:(id<STPAPIResponseDecodable>)deserializer
-                                   completion:(STPAPIResponseBlock)completion {
-    return [self deleteWithAPIClient:apiClient endpoint:endpoint parameters:parameters deserializers:@[deserializer] completion:completion];
-}
-
-+ (NSURLSessionDataTask *)deleteWithAPIClient:(STPAPIClient *)apiClient
-                                     endpoint:(NSString *)endpoint
-                                   parameters:(NSDictionary *)parameters
-                                deserializers:(NSArray<id<STPAPIResponseDecodable>> *)deserializers
-                                   completion:(STPAPIResponseBlock)completion {
-    // Build url
-    NSURL *url = [apiClient.apiURL URLByAppendingPathComponent:endpoint];
-
-    // Setup request
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
-    [request stp_addParametersToURL:parameters];
-    request.HTTPMethod = HTTPMethodDELETE;
-
-    // Perform request
-    NSURLSessionDataTask *task = [apiClient.urlSession dataTaskWithRequest:request completionHandler:^(NSData *body, NSURLResponse *response, NSError *error) {
-        [[self class] parseResponse:response body:body error:error deserializers:deserializers completion:completion];
-    }];
-    [task resume];
-
-    return task;
-}
-
-#pragma mark -
 
 + (void)parseResponse:(NSURLResponse *)response
                  body:(NSData *)body
                 error:(NSError *)error
         deserializers:(NSArray<id<STPAPIResponseDecodable>>*)deserializers
            completion:(STPAPIResponseBlock)completion {
-    // Derive HTTP URL response
-    NSHTTPURLResponse *httpResponse = nil;
+    id<STPAPIResponseDecodable> responseObject;
+    NSError *returnedError;
+    NSHTTPURLResponse *httpResponse;
     if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
         httpResponse = (NSHTTPURLResponse *)response;
     }
 
-    // Wrap completion block with main thread dispatch
-    void (^safeCompletion)(id<STPAPIResponseDecodable>, NSError *) = ^(id<STPAPIResponseDecodable> responseObject, NSError *responseError) {
-        stpDispatchToMainThreadIfNecessary(^{
-            completion(responseObject, httpResponse, responseError);
-        });
-    };
-
-    if (error) {
-        // Forward NSURLSession error
-        return safeCompletion(nil, error);
-    }
-
     if (deserializers.count == 0) {
-        // Missing deserializers
-        return safeCompletion(nil, [NSError stp_genericFailedToParseResponseError]);
-    }
-
-    // Parse JSON response body
-    NSDictionary *jsonDictionary = nil;
-    if (body) {
-        jsonDictionary = [NSJSONSerialization JSONObjectWithData:body options:(NSJSONReadingOptions)kNilOptions error:NULL];
-    }
-
-    // Determine appropriate deserializer
-    NSString *objectString = jsonDictionary[JSONKeyObject];
-
-    Class deserializerClass = nil;
-    if (deserializers.count == 1) {
-        // Some deserializers don't conform to STPInternalAPIResponseDecodable
-        deserializerClass = [deserializers.firstObject class];
-    }
-    else if (objectString != nil) {
-        for (id<STPAPIResponseDecodable> deserializer in deserializers) {
-            if ([deserializer respondsToSelector:@selector(stripeObject)]
-                && [[(id<STPInternalAPIResponseDecodable>)deserializer stripeObject] isEqualToString:objectString]) {
-                // Found matching deserializer
-                deserializerClass = [deserializer class];
+        returnedError = [NSError stp_genericFailedToParseResponseError];
+    } else {
+        NSDictionary *jsonDictionary = body ? [NSJSONSerialization JSONObjectWithData:body options:(NSJSONReadingOptions)kNilOptions error:NULL] : nil;
+        NSString *object = jsonDictionary[@"object"];
+        Class deserializerClass;
+        if (deserializers.count == 1) {
+            deserializerClass = [deserializers.firstObject class];
+        } else {
+            for (id<STPAPIResponseDecodable> deserializer in deserializers) {
+                if ([deserializer respondsToSelector:@selector(stripeObject)]
+                    && [[(id<STPInternalAPIResponseDecodable>)deserializer stripeObject] isEqualToString:object]) {
+                    deserializerClass = [deserializer class];
+                }
             }
         }
-    }
-
-    id<STPAPIResponseDecodable> responseObject = nil;
-    if (deserializerClass) {
-        // Generate response object
-        responseObject = [deserializerClass decodedObjectFromAPIResponse:jsonDictionary];
-    }
-
-    if (!responseObject) {
-        // Failed to parse response
-        NSError *parsedError = [NSError stp_errorFromStripeResponse:jsonDictionary];
-
-        if (parsedError) {
-            // Use response body error
-            return safeCompletion(nil, parsedError);
+        if (!deserializerClass) {
+            returnedError = [NSError stp_genericFailedToParseResponseError];
+        } else {
+            responseObject = [deserializerClass decodedObjectFromAPIResponse:jsonDictionary];
+            returnedError = [NSError stp_errorFromStripeResponse:jsonDictionary] ?: error;
         }
-
-        // Use generic error
-        return safeCompletion(nil, [NSError stp_genericFailedToParseResponseError]);
+        if ((!responseObject || ![response isKindOfClass:[NSHTTPURLResponse class]]) && !returnedError) {
+            returnedError = [NSError stp_genericFailedToParseResponseError];
+        }
     }
 
-    return safeCompletion(responseObject, nil);
+    stpDispatchToMainThreadIfNecessary(^{
+        if (returnedError) {
+            completion(nil, httpResponse, returnedError);
+        } else {
+            completion(responseObject, httpResponse, nil);
+        }
+    });
+
 }
 
 @end

@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 #import "STPAPIResponseDecodable.h"
-
 @class STPAPIClient;
 
 @interface STPAPIRequest<__covariant ResponseType:id<STPAPIResponseDecodable>> : NSObject
@@ -24,25 +23,19 @@ typedef void(^STPAPIResponseBlock)(ResponseType object, NSHTTPURLResponse *respo
 + (NSURLSessionDataTask *)postWithAPIClient:(STPAPIClient *)apiClient
                                     endpoint:(NSString *)endpoint
                                   parameters:(NSDictionary *)parameters
-                               deserializers:(NSArray<ResponseType> *)deserializers
+                               deserializers:(NSArray<ResponseType>*)deserializers
                                   completion:(STPAPIResponseBlock)completion;
 
 + (NSURLSessionDataTask *)getWithAPIClient:(STPAPIClient *)apiClient
                                   endpoint:(NSString *)endpoint
                                 parameters:(NSDictionary *)parameters
-                              deserializer:(ResponseType)deserializer
+                              deserializer:(id<STPAPIResponseDecodable>)deserializer
                                 completion:(STPAPIResponseBlock)completion;
 
-+ (NSURLSessionDataTask *)deleteWithAPIClient:(STPAPIClient *)apiClient
-                                     endpoint:(NSString *)endpoint
-                                   parameters:(NSDictionary *)parameters
-                                 deserializer:(ResponseType)deserializer
-                                   completion:(STPAPIResponseBlock)completion;
-
-+ (NSURLSessionDataTask *)deleteWithAPIClient:(STPAPIClient *)apiClient
-                                     endpoint:(NSString *)endpoint
-                                   parameters:(NSDictionary *)parameters
-                                deserializers:(NSArray<ResponseType> *)deserializer
-                                   completion:(STPAPIResponseBlock)completion;
++ (void)parseResponse:(NSURLResponse *)response
+                body:(NSData *)body
+               error:(NSError *)error
+       deserializers:(NSArray<id<STPAPIResponseDecodable>>*)deserializers
+          completion:(STPAPIResponseBlock)completion;
 
 @end

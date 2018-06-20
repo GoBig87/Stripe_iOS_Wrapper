@@ -15,8 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (STPCardFundingType)fundingFromString:(NSString *)string;
 + (nullable NSString *)stringFromFunding:(STPCardFundingType)funding;
-
-+ (NSString *)stringFromBrand:(STPCardBrand)brand;
+- (nullable STPAddress *)address;
 
 @end
 

@@ -12,7 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface STPSourceVerification ()
 
-//
++ (STPSourceVerificationStatus)statusFromString:(NSString *)string;
++ (nullable NSString *)stringFromStatus:(STPSourceVerificationStatus)status;
 
 @end
 

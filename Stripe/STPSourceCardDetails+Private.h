@@ -12,7 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface STPSourceCardDetails ()
 
-//
++ (STPSourceCard3DSecureStatus)threeDSecureStatusFromString:(NSString *)string;
++ (nullable NSString *)stringFromThreeDSecureStatus:(STPSourceCard3DSecureStatus)threeDSecureStatus;
 
 @end
 

@@ -9,7 +9,7 @@
 #import "STPCustomerContext.h"
 
 #import "STPAPIClient+Private.h"
-#import "STPCustomer+Private.h"
+#import "STPCustomer.h"
 #import "STPEphemeralKey.h"
 #import "STPEphemeralKeyManager.h"
 #import "STPWeakStrongMacros.h"
@@ -38,7 +38,6 @@ static NSTimeInterval const CachedCustomerMaxAge = 60;
     self = [self init];
     if (self) {
         _keyManager = keyManager;
-        _includeApplePaySources = NO;
         [self retrieveCustomer:nil];
     }
     return self;
@@ -51,12 +50,6 @@ static NSTimeInterval const CachedCustomerMaxAge = 60;
 - (void)setCustomer:(STPCustomer *)customer {
     _customer = customer;
     _customerRetrievedDate = (customer) ? [NSDate date] : nil;
-}
-
-- (void)setIncludeApplePaySources:(BOOL)includeApplePaySources {
-    _includeApplePaySources = includeApplePaySources;
-    [self.customer updateSourcesWithResponse:self.customer.allResponseFields
-                           filteringApplePay:!includeApplePaySources];
 }
 
 - (BOOL)shouldUseCachedCustomer {
@@ -87,8 +80,6 @@ static NSTimeInterval const CachedCustomerMaxAge = 60;
         }
         [STPAPIClient retrieveCustomerUsingKey:ephemeralKey completion:^(STPCustomer *customer, NSError *error) {
             if (customer) {
-                [customer updateSourcesWithResponse:self.customer.allResponseFields
-                                  filteringApplePay:!self.includeApplePaySources];
                 self.customer = customer;
             }
             if (completion) {
@@ -113,8 +104,7 @@ static NSTimeInterval const CachedCustomerMaxAge = 60;
         [STPAPIClient addSource:source.stripeID
              toCustomerUsingKey:ephemeralKey
                      completion:^(__unused id<STPSourceProtocol> object, NSError *error) {
-                         [self clearCachedCustomer];
-
+                         self.customer = nil;
                          if (completion) {
                              stpDispatchToMainThreadIfNecessary(^{
                                  completion(error);
@@ -138,8 +128,6 @@ static NSTimeInterval const CachedCustomerMaxAge = 60;
                                           usingKey:ephemeralKey
                                         completion:^(STPCustomer *customer, NSError *error) {
                                             if (customer) {
-                                                [customer updateSourcesWithResponse:self.customer.allResponseFields
-                                                                  filteringApplePay:!self.includeApplePaySources];
                                                 self.customer = customer;
                                             }
                                             if (completion) {
@@ -168,8 +156,6 @@ static NSTimeInterval const CachedCustomerMaxAge = 60;
                                           usingKey:ephemeralKey
                                         completion:^(STPCustomer *customer, NSError *error) {
                                             if (customer) {
-                                                [customer updateSourcesWithResponse:self.customer.allResponseFields
-                                                                  filteringApplePay:!self.includeApplePaySources];
                                                 self.customer = customer;
                                             }
                                             if (completion) {
@@ -178,31 +164,6 @@ static NSTimeInterval const CachedCustomerMaxAge = 60;
                                                 });
                                             }
                                         }];
-    }];
-}
-
-- (void)detachSourceFromCustomer:(id<STPSourceProtocol>)source completion:(STPErrorBlock)completion {
-    [self.keyManager getCustomerKey:^(STPEphemeralKey *ephemeralKey, NSError *retrieveKeyError) {
-        if (retrieveKeyError) {
-            if (completion) {
-                stpDispatchToMainThreadIfNecessary(^{
-                    completion(retrieveKeyError);
-                });
-            }
-            return;
-        }
-
-        [STPAPIClient deleteSource:source.stripeID
-              fromCustomerUsingKey:ephemeralKey
-                        completion:^(__unused id<STPSourceProtocol> obj, NSError *error) {
-                            [self clearCachedCustomer];
-
-                            if (completion) {
-                                stpDispatchToMainThreadIfNecessary(^{
-                                    completion(error);
-                                });
-                            }
-                        }];
     }];
 }
 
