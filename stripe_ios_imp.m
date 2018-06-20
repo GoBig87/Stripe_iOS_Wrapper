@@ -1,7 +1,7 @@
 #import <Foundation/Foundation.h>
 #import "Stripe/STPCardParams.h"
 #import "Stripe/STPAPIClient.h"
-#import "StriSTPToken.h"
+#import "Stripe/STPToken.h"
 #import <Foundation/NSError.h>
 #import <Foundation/NSString.h>
 
