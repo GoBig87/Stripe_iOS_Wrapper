@@ -19,5 +19,15 @@ class StripeWrapper():
 
     def getToken(self,myKey,cardNumber,expMonth,expYear,cvc):
         cdef _Stripe storage = <_Stripe>self._storage
+
+        cdef bytes myKey_bytes = myKey.encode()
+        cdef char* myKey_string = myKey_bytes
+        cdef bytes cardNumber_bytes = cardNumber.encode()
+        cdef char* cardNumber_string = cardNumber_bytes
+        cdef bytes cvc_bytes = cvc.encode()
+        cdef char* cvc_string = cvc_bytes
+
         storage.stripe = stripe_wrapper_init()
-        return stripe_get_token(storage.stripe,myKey,cardNumber,expMonth,expYear,cvc)
+        cdef char* c_string_token =  stripe_get_token(storage.stripe,myKey_string,cardNumber_string,expMonth,expYear,cvc_string)
+        cdef bytes py_string_token = c_string_token
+        return py_string_token
