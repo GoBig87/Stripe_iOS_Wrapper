@@ -14,7 +14,7 @@ public:
 StripWrapper::StripWrapper(){
 }
 
-const char* StripWrapper::retrieveToken(const char* cardNumber, int expMonth, int expYear, const char* cvc) {
+const char* StripWrapper::retrieveToken(const char* key, const char* cardNumber, int expMonth, int expYear, const char* cvc) {
 
     NSString* NScardNumber = [NSString stringWithUTF8String:cardNumber];
     NSString* NScvc = [NSString stringWithUTF8String:cvc];
@@ -26,12 +26,19 @@ const char* StripWrapper::retrieveToken(const char* cardNumber, int expMonth, in
     cardParams.cvc = NScvc;
 
     __block const char* returnString;
+    NSString myPublishableKey = [NSString stringWithUTF8String:key];
 
-    [[STPAPIClient sharedClient] createTokenWithCard:cardParams completion:^(STPToken *token,NSError *error) {
+    STPAPIClient *sharedClient = [[STPAPIClient alloc] initWithPublishableKey:myPublishableKey];
+
+    [sharedClient createTokenWithCard:cardParams completion:^(STPToken *token,NSError *error) {
         if (token == nil || error != nil) {
+            printf('DEBUG ERROR REQ')
+            printf([error.localizedDescription UTF8String])
             returnString = [error.localizedDescription UTF8String];
         }
         else{
+            printf('DEBUG TOKEN REQ')
+            printf([token.tokenId UTF8String])
             returnString =  [token.tokenId UTF8String];
         }
     }];
@@ -47,6 +54,6 @@ const char* StripWrapper::retrieveToken(const char* cardNumber, int expMonth, in
 strip_wrapper_t stripe_wrapper_init() {
     return new StripWrapper();
 }
-const char* stripe_get_token(strip_wrapper_t stripe, const char* cardNumber, int expMonth, int expYear, const char* cvc){
+const char* stripe_get_token(strip_wrapper_t stripe, const char* key, const char* cardNumber, int expMonth, int expYear, const char* cvc){
     return ((StripWrapper *)stripe)->retrieveToken(cardNumber,expMonth,expYear,cvc);
 }
