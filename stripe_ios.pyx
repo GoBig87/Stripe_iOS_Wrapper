@@ -16,7 +16,6 @@ class StripeWrapper():
 
     def __init__(self,**kwargs):
         self._storage = _Stripe()
-        super(StripeWrapper, self).__init__(**kwargs)
 
     def getToken(self,cardNumber,expMonth,expYear,cvc):
         cdef _Stripe storage = <_Stripe>self._storage
