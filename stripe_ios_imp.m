@@ -51,5 +51,5 @@ strip_wrapper_t stripe_wrapper_init() {
     return new StripWrapper();
 }
 const char* stripe_get_token(strip_wrapper_t stripe, const char* myKey, const char* cardNumber, int expMonth, int expYear, const char* cvc){
-    return ((StripWrapper *)stripe)->retrieveToken(cardNumber,expMonth,expYear,cvc);
+    return ((StripWrapper *)stripe)->retrieveToken(myKey,cardNumber,expMonth,expYear,cvc);
 }
