@@ -21,11 +21,11 @@ class StripeWrapper():
         cdef _Stripe storage = <_Stripe>self._storage
 
         cdef bytes myKey_bytes = myKey.encode('utf-8')
-        cdef const char* myKey_string = myKey_bytes
+        cdef char* myKey_string = myKey_bytes
         cdef bytes cardNumber_bytes = cardNumber.encode('utf-8')
-        cdef const char* cardNumber_string = cardNumber_bytes
+        cdef char* cardNumber_string = cardNumber_bytes
         cdef bytes cvc_bytes = cvc.encode('utf-8')
-        cdef const char* cvc_string = cvc_bytes
+        cdef char* cvc_string = cvc_bytes
 
         storage.stripe = stripe_wrapper_init()
         cdef const char* c_string_token =  stripe_get_token(storage.stripe,myKey_bytes,cardNumber_string,expMonth,expYear,cvc_string)
