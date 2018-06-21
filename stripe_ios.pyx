@@ -20,11 +20,11 @@ class StripeWrapper():
     def getToken(self,myKey,cardNumber,expMonth,expYear,cvc):
         cdef _Stripe storage = <_Stripe>self._storage
 
-        cdef bytes myKey_bytes = myKey.encode()
+        cdef bytes myKey_bytes = myKey.encode('UTF-8')
         cdef char* myKey_string = myKey_bytes
-        cdef bytes cardNumber_bytes = cardNumber.encode()
+        cdef bytes cardNumber_bytes = cardNumber.encode('UTF-8')
         cdef char* cardNumber_string = cardNumber_bytes
-        cdef bytes cvc_bytes = cvc.encode()
+        cdef bytes cvc_bytes = cvc.encode('UTF-8')
         cdef char* cvc_string = cvc_bytes
 
         storage.stripe = stripe_wrapper_init()
