@@ -26,19 +26,15 @@ const char* StripWrapper::retrieveToken(const char* myKey, const char* cardNumbe
     cardParams.cvc = NScvc;
 
     __block const char* returnString;
-    NSString myPublishableKey = [NSString stringWithUTF8String:myKey];
+    NSString *myPublishableKey = [NSString stringWithUTF8String:myKey];
 
     STPAPIClient *sharedClient = [[STPAPIClient alloc] initWithPublishableKey:myPublishableKey];
 
     [sharedClient createTokenWithCard:cardParams completion:^(STPToken *token,NSError *error) {
         if (token == nil || error != nil) {
-            printf('DEBUG ERROR REQ')
-            printf([error.localizedDescription UTF8String])
             returnString = [error.localizedDescription UTF8String];
         }
         else{
-            printf('DEBUG TOKEN REQ')
-            printf([token.tokenId UTF8String])
             returnString =  [token.tokenId UTF8String];
         }
     }];
