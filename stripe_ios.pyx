@@ -29,4 +29,4 @@ class StripeWrapper():
 
         storage.stripe = stripe_wrapper_init()
         c_string_token =  stripe_get_token(storage.stripe,myKey,cardNumber,expMonth,expYear,cvc)
-        return str(c_string_token)
+        return c_string_token
