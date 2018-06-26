@@ -4,18 +4,17 @@
 #import "Stripe/PublicHeaders/STPToken.h"
 #import <Foundation/NSError.h>
 #import <Foundation/NSString.h>
-#include <string>
 
 class StripWrapper {
 public:
     StripWrapper();
     ~StripWrapper();
-    std::string retrieveToken(char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc);
+    char* retrieveToken(char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc);
 };
 StripWrapper::StripWrapper(){
 }
 
-std::string StripWrapper::retrieveToken(char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc) {
+char* StripWrapper::retrieveToken(char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc) {
 
     NSString* NScardNumber = [NSString stringWithUTF8String:cardNumber];
     NSString* NScvc = [NSString stringWithUTF8String:cvc];
@@ -26,20 +25,20 @@ std::string StripWrapper::retrieveToken(char* myKey, char* cardNumber, int expMo
     cardParams.expYear = expYear;
     cardParams.cvc = NScvc;
 
-    __block NSString* returnString;
+    __block char* returnString;
     NSString *myPublishableKey = [NSString stringWithUTF8String:myKey];
 
     STPAPIClient *sharedClient = [[STPAPIClient alloc] initWithPublishableKey:myPublishableKey];
 
     [sharedClient createTokenWithCard:cardParams completion:^(STPToken *token,NSError *error) {
         if (token == nil || error != nil) {
-            returnString = error.localizedDescription;
+            returnString = [error.localizedDescription UTF8String];
         }
         else{
-            returnString =  token.tokenId;
+            returnString =  [token.tokenId UTF8String];
         }
     }];
-    return std::string([returnString UTF8String]);
+    return returnString
 }
 
 //
@@ -51,6 +50,6 @@ std::string StripWrapper::retrieveToken(char* myKey, char* cardNumber, int expMo
 strip_wrapper_t stripe_wrapper_init() {
     return new StripWrapper();
 }
-std::string stripe_get_token(strip_wrapper_t stripe, char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc){
+char* stripe_get_token(strip_wrapper_t stripe, char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc){
     return ((StripWrapper *)stripe)->retrieveToken(myKey,cardNumber,expMonth,expYear,cvc);
 }
