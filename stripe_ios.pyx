@@ -4,7 +4,7 @@ __all__ = ['StripeWrapper']
 cdef extern from "stripe_ios_imp.h":
     ctypedef void *strip_wrapper_t
     strip_wrapper_t stripe_wrapper_init()
-    const char* stripe_get_token(strip_wrapper_t stripe,const char* myKey, const char* cardNumber, int expMonth, int expYear,const char* cvc)
+    char* stripe_get_token(strip_wrapper_t stripe, char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc)
 
 cdef class _Stripe:
     cdef strip_wrapper_t stripe
@@ -28,7 +28,7 @@ class StripeWrapper():
         cdef char* cvc_string = cvc_bytes
 
         storage.stripe = stripe_wrapper_init()
-        cdef const char* c_string_token =  stripe_get_token(storage.stripe,myKey_bytes,cardNumber_bytes,expMonth,expYear,cvc_bytes)
+        cdef char* c_string_token =  stripe_get_token(storage.stripe,myKey_bytes,cardNumber_bytes,expMonth,expYear,cvc_bytes)
         cdef bytes c_bytes_token = c_string_token
         python_token = c_bytes_token.decode("utf-8")
         return python_token
