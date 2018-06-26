@@ -1,8 +1,6 @@
 STUFF = "Hi"
 __all__ = ['StripeWrapper']
 
-from libc.stdlib cimport malloc, free
-
 cdef extern from "stripe_ios_imp.h":
     ctypedef void *strip_wrapper_t
     strip_wrapper_t stripe_wrapper_init()
@@ -22,7 +20,6 @@ class StripeWrapper():
     def getToken(self,myKey,cardNumber,expMonth,expYear,cvc):
         cdef _Stripe storage = <_Stripe>self._storage
 
-        cdef char ** string_buf = malloc(len(pystr_list) * sizeof(char *))
         cdef bytes myKey_bytes = myKey.encode('utf-8')
         cdef char* myKey_string = myKey_bytes
         cdef bytes cardNumber_bytes = cardNumber.encode('utf-8')
