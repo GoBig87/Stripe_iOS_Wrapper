@@ -4,6 +4,7 @@
 #import "Stripe/PublicHeaders/STPToken.h"
 #import <Foundation/NSError.h>
 #import <Foundation/NSString.h>
+#include <string>
 
 class StripWrapper {
 public:
