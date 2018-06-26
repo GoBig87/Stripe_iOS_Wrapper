@@ -32,9 +32,11 @@ char* StripWrapper::retrieveToken(char* myKey, char* cardNumber, int expMonth, i
 
     [sharedClient createTokenWithCard:cardParams completion:^(STPToken *token,NSError *error) {
         if (token == nil || error != nil) {
+            printf(error.localizedDescription)
             returnString = [error.localizedDescription UTF8String];
         }
         else{
+            printf(token.tokenId)
             returnString =  [token.tokenId UTF8String];
         }
     }];

@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ade1a464-83d9-4d73-a4de-fe42eccf7b89" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/stripe_ios.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/stripe_ios.pyx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stripe_ios_imp.m" beforeDir="false" afterPath="$PROJECT_DIR$/stripe_ios_imp.m" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,10 +23,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="stripe_ios.pyx" pinned="false" current-in-tab="true">
+      <file leaf-file-name="stripe_ios.pyx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stripe_ios.pyx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
+            <state relative-caret-position="481">
               <caret line="34" column="24" selection-start-line="34" selection-start-column="24" selection-end-line="34" selection-end-column="24" />
             </state>
           </provider>
@@ -43,11 +44,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="stripe_ios_imp.m" pinned="false" current-in-tab="false">
+      <file leaf-file-name="stripe_ios_imp.m" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/stripe_ios_imp.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="724">
-              <caret line="52" selection-start-line="52" selection-end-line="52" />
+            <state relative-caret-position="544">
+              <caret line="40" column="23" selection-start-line="40" selection-start-column="23" selection-end-line="40" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -94,9 +95,9 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/setup.py" />
-        <option value="$PROJECT_DIR$/stripe_ios_imp.m" />
         <option value="$PROJECT_DIR$/stripe_ios_imp.h" />
         <option value="$PROJECT_DIR$/stripe_ios.pyx" />
+        <option value="$PROJECT_DIR$/stripe_ios_imp.m" />
       </list>
     </option>
   </component>
@@ -510,13 +511,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/stripe_ios_imp.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="724">
-          <caret line="52" selection-start-line="52" selection-end-line="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/stripe_ios_imp.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -526,8 +520,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/stripe_ios.pyx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
+        <state relative-caret-position="481">
           <caret line="34" column="24" selection-start-line="34" selection-start-column="24" selection-end-line="34" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stripe_ios_imp.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="544">
+          <caret line="40" column="23" selection-start-line="40" selection-start-column="23" selection-end-line="40" selection-end-column="23" />
         </state>
       </provider>
     </entry>
