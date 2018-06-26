@@ -25,7 +25,7 @@ char* StripWrapper::retrieveToken(char* myKey, char* cardNumber, int expMonth, i
     cardParams.expYear = expYear;
     cardParams.cvc = NScvc;
 
-    __block char* returnString;
+    __block NSString* returnString;
     NSString *myPublishableKey = [NSString stringWithUTF8String:myKey];
 
     STPAPIClient *sharedClient = [[STPAPIClient alloc] initWithPublishableKey:myPublishableKey];
