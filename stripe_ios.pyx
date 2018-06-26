@@ -28,7 +28,7 @@ class StripeWrapper():
         cdef char* cvc_string = cvc_bytes
 
         storage.stripe = stripe_wrapper_init()
-        cdef const char* c_string_token =  stripe_get_token(storage.stripe,myKey_bytes,cardNumber_string,expMonth,expYear,cvc_string)
+        cdef const char* c_string_token =  stripe_get_token(storage.stripe,myKey_string,cardNumber_string,expMonth,expYear,cvc_string)
         cdef bytes c_bytes_token = c_string_token
         python_token = c_bytes_token.decode("utf-8")
         return python_token
