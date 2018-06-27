@@ -35,13 +35,13 @@ const char* StripWrapper::retrieveToken(char* myKey, char* cardNumber, int expMo
         tokenChar = [token.tokenId UTF8String];
     }];
     while(tokenChar == nil){
-    };
+    }
     if (tokenChar == nil || errorChar != nil) {
         return errorChar;
-    };
+    }
     else{
         return tokenChar;
-    };
+    }
 }
 
 //
