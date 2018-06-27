@@ -9,13 +9,13 @@ class StripWrapper {
 public:
     StripWrapper();
     ~StripWrapper();
-    char* retrieveToken(char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc);
-    char *tokenChar;
+    const char* retrieveToken(char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc);
+    const char *tokenChar;
 };
 StripWrapper::StripWrapper(){
 }
 
-char* StripWrapper::retrieveToken(char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc) {
+const char* StripWrapper::retrieveToken(char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc) {
 
     NSString* NScardNumber = [NSString stringWithUTF8String:cardNumber];
     NSString* NScvc = [NSString stringWithUTF8String:cvc];
@@ -51,6 +51,6 @@ char* StripWrapper::retrieveToken(char* myKey, char* cardNumber, int expMonth, i
 strip_wrapper_t stripe_wrapper_init() {
     return new StripWrapper();
 }
-char* stripe_get_token(strip_wrapper_t stripe, char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc){
+const char* stripe_get_token(strip_wrapper_t stripe, char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc){
     return ((StripWrapper *)stripe)->retrieveToken(myKey,cardNumber,expMonth,expYear,cvc);
 }
