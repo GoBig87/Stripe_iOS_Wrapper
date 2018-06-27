@@ -10,7 +10,8 @@ public:
     StripWrapper();
     ~StripWrapper();
     const char* retrieveToken(char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc);
-    const char *tokenChar;
+    const char* tokenChar;
+    const char* errorChar;
 };
 StripWrapper::StripWrapper(){
 }
@@ -30,16 +31,17 @@ const char* StripWrapper::retrieveToken(char* myKey, char* cardNumber, int expMo
     //STPAPIClient *sharedClient = [[STPAPIClient alloc] initWithPublishableKey:myPublishableKey];
 
     [[[STPAPIClient alloc] initWithPublishableKey:myPublishableKey] createTokenWithCard:cardParams completion:^(STPToken *token,NSError *error) {
-        if (token == nil || error != nil) {
-            tokenChar = [error.localizedDescription UTF8String];
-        }
-        else{
-            tokenChar = [token.tokenId UTF8String];
-        }
+        errorChar = [error.localizedDescription UTF8String];
+        tokenChar = [token.tokenId UTF8String];
     }];
     while(tokenChar == nil){
-    }
-    return tokenChar;
+    };
+    if (token == nil || error != nil) {
+        return errorChar;
+    };
+    else{
+        return tokenChar;
+    };
 }
 
 //
