@@ -30,7 +30,6 @@ const char* StripWrapper::retrieveToken(char* myKey, char* cardNumber, int expMo
     //STPAPIClient *sharedClient = [[STPAPIClient alloc] initWithPublishableKey:myPublishableKey];
 
     [[[STPAPIClient alloc] initWithPublishableKey:myPublishableKey] createTokenWithCard:cardParams completion:^(STPToken *token,NSError *error) {
-        printf('Waiting')
         if (token == nil || error != nil) {
             tokenChar = [error.localizedDescription UTF8String];
         }
