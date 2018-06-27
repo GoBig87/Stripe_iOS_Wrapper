@@ -9,12 +9,12 @@ class StripWrapper {
 public:
     StripWrapper();
     ~StripWrapper();
-    const char* retrieveToken(char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc);
+    char* retrieveToken(char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc);
 };
 StripWrapper::StripWrapper(){
 }
 
-const char* StripWrapper::retrieveToken(char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc) {
+char* StripWrapper::retrieveToken(char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc) {
 
     NSString* NScardNumber = [NSString stringWithUTF8String:cardNumber];
     NSString* NScvc = [NSString stringWithUTF8String:cvc];
@@ -25,19 +25,19 @@ const char* StripWrapper::retrieveToken(char* myKey, char* cardNumber, int expMo
     cardParams.expYear = expYear;
     cardParams.cvc = NScvc;
 
-    __block const char* returnString;
+    char* returnString;
     NSString *myPublishableKey = [NSString stringWithUTF8String:myKey];
 
     STPAPIClient *sharedClient = [[STPAPIClient alloc] initWithPublishableKey:myPublishableKey];
 
     [sharedClient createTokenWithCard:cardParams completion:^(STPToken *token,NSError *error) {
-        if (token == nil || error != nil) {
-            returnString = [error.localizedDescription UTF8String];
-        }
-        else{
-            returnString =  [token.tokenId UTF8String];
-        }
     }];
+    if (token == nil || error != nil) {
+        returnString = [error.localizedDescription UTF8String];
+    }
+    else{
+        returnString =  [token.tokenId UTF8String];
+    }
     return returnString;
 }
 
@@ -50,6 +50,6 @@ const char* StripWrapper::retrieveToken(char* myKey, char* cardNumber, int expMo
 strip_wrapper_t stripe_wrapper_init() {
     return new StripWrapper();
 }
-const char* stripe_get_token(strip_wrapper_t stripe, char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc){
+char* stripe_get_token(strip_wrapper_t stripe, char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc){
     return ((StripWrapper *)stripe)->retrieveToken(myKey,cardNumber,expMonth,expYear,cvc);
 }
