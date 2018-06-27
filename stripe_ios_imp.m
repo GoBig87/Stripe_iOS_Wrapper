@@ -10,6 +10,7 @@ public:
     StripWrapper();
     ~StripWrapper();
     char* retrieveToken(char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc);
+    char *tokenChar;
 };
 StripWrapper::StripWrapper(){
 }
@@ -26,19 +27,24 @@ char* StripWrapper::retrieveToken(char* myKey, char* cardNumber, int expMonth, i
     cardParams.cvc = NScvc;
 
     char* returnString;
+    _block const char* errorChar
+    _block const char* tokenChar
+
     NSString *myPublishableKey = [NSString stringWithUTF8String:myKey];
 
     STPAPIClient *sharedClient = [[STPAPIClient alloc] initWithPublishableKey:myPublishableKey];
 
     [sharedClient createTokenWithCard:cardParams completion:^(STPToken *token,NSError *error) {
+        if (token == nil || error != nil) {
+            tokenChar = [error.localizedDescription UTF8String];
+        }
+        else{
+            tokenChar = [token.tokenId UTF8String];
+        }
     }];
-    if (token == nil || error != nil) {
-        returnString = [error.localizedDescription UTF8String];
+    while(tokenChar == nil){
     }
-    else{
-        returnString =  [token.tokenId UTF8String];
-    }
-    return returnString;
+    return tokenChar;
 }
 
 //
