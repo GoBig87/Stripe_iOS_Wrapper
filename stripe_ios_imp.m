@@ -38,7 +38,7 @@ const char* StripWrapper::retrieveToken(char* myKey, char* cardNumber, int expMo
             returnString =  [token.tokenId UTF8String];
         }
     }];
-    return *returnString;
+    return returnString;
 }
 
 //
