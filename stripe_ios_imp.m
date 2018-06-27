@@ -36,7 +36,7 @@ const char* StripWrapper::retrieveToken(char* myKey, char* cardNumber, int expMo
     }];
     while(tokenChar == nil){
     };
-    if (token == nil || error != nil) {
+    if (tokenChar == nil || errorChar != nil) {
         return errorChar;
     };
     else{
