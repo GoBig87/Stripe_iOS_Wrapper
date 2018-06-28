@@ -25,7 +25,7 @@ def getToken(self,util,myKey,cardNumber,expMonth,expYear,cvc):
     print cvc_string
     cdef char* token_callback
 
-    retrieveToken( myKey_bytes, cardNumber_bytes, expMonth, expYear, cvc_bytes, callback, <void*>token_callback)
+    retrieveToken( myKey_bytes, cardNumber_bytes, expMonth, expYear, cvc_bytes, callback, <void*>util.token)
     print token_callback
     util.token = token_callback.decode('UTF-8')
     print 'Debug 1'
