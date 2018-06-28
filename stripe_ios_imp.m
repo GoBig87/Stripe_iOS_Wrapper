@@ -25,10 +25,12 @@ void retrieveToken(char* myKey, char* cardNumber, int expMonth, int expYear, cha
         const char* tokenChar;
         if (token == nil || error != nil) {
             tokenChar = [error.localizedDescription UTF8String];
+            user_func(tokenChar,user_data);
         } else {
             tokenChar = [token.tokenId UTF8String];
+            user_func(tokenChar,user_data);
         }
-        completion(user_func(tokenChar,user_data));
+
     }];
 }
 
