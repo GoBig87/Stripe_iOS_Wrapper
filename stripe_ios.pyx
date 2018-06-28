@@ -7,15 +7,15 @@ cdef extern from "stripe_ios_imp.h":
     strip_wrapper_t stripe_wrapper_init()
     void stripe_get_token(stripe_wrapper_t stripe, char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc,tokenfunc user_fun,void *user_data)
 
+cdef void callback(char *name, void *f):
+    (<object>f)(name.decode('utf-8'))
+
 cdef class _Stripe:
     cdef stripe_wrapper_t stripe
 
     def __cinit__(self):
         self.stripe = NULL
 
-cdef void callback(char *name, void *f):
-    (<object>f)(name.decode('utf-8'))
-    
 class StripeWrapper():
 
     def __init__(self,**kwargs):
