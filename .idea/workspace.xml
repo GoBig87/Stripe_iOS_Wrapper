@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ade1a464-83d9-4d73-a4de-fe42eccf7b89" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/stripe_ios.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/stripe_ios.pyx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stripe_ios_imp.h" beforeDir="false" afterPath="$PROJECT_DIR$/stripe_ios_imp.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stripe_ios_imp.m" beforeDir="false" afterPath="$PROJECT_DIR$/stripe_ios_imp.m" afterDir="false" />
-    </list>
+    <list default="true" id="ade1a464-83d9-4d73-a4de-fe42eccf7b89" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,7 +15,7 @@
         <entry file="file://$PROJECT_DIR$/stripe_ios_imp.h">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="30">
-              <caret line="2" column="18" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="18" />
+              <caret line="2" column="118" lean-forward="true" selection-start-line="2" selection-start-column="118" selection-end-line="2" selection-end-column="118" />
             </state>
           </provider>
         </entry>
@@ -48,8 +44,8 @@
       <file leaf-file-name="stripe_ios_imp.m" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stripe_ios_imp.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="18" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="18" />
+            <state relative-caret-position="420">
+              <caret line="28" column="51" lean-forward="true" selection-start-line="28" selection-start-column="51" selection-end-line="28" selection-end-column="51" />
             </state>
           </provider>
         </entry>
@@ -517,17 +513,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/stripe_ios_imp.m">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="18" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/stripe_ios_imp.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
-          <caret line="2" column="18" selection-start-line="2" selection-start-column="5" selection-end-line="2" selection-end-column="18" />
+          <caret line="2" column="118" lean-forward="true" selection-start-line="2" selection-start-column="118" selection-end-line="2" selection-end-column="118" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stripe_ios_imp.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" column="51" lean-forward="true" selection-start-line="28" selection-start-column="51" selection-end-line="28" selection-end-column="51" />
         </state>
       </provider>
     </entry>

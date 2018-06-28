@@ -7,7 +7,7 @@
 
 #include "stripe_ios_imp.h"
 
-void retrieveToken(char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc,tokenfunc callback_func,void *user_data){
+void retrieveToken(tokenfunc callback_func,char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc,void *user_data){
 
     NSString* NScardNumber = [NSString stringWithUTF8String:cardNumber];
     NSString* NScvc = [NSString stringWithUTF8String:cvc];
