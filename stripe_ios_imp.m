@@ -28,7 +28,7 @@ void retrieveToken(char* myKey, char* cardNumber, int expMonth, int expYear, cha
         } else {
             tokenChar = [token.tokenId UTF8String];
         }
-        if (completion) user_func(tokenChar,user_data);
+        completion(user_func(tokenChar,user_data));
     }];
 }
 
