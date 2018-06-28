@@ -21,7 +21,7 @@ class StripeWrapper():
     def __init__(self,**kwargs):
         self._storage = _Stripe()
 
-    def getToken(utilToken,myKey,cardNumber,expMonth,expYear,cvc):
+    def getToken(self,util,myKey,cardNumber,expMonth,expYear,cvc):
         cdef _Stripe storage = <_Stripe>self._storage
 
         cdef bytes myKey_bytes = myKey.encode('utf-8')
@@ -42,8 +42,8 @@ class StripeWrapper():
         storage.stripe = stripe_wrapper_init()
         stripe_get_token(storage.stripe,myKey_bytes,cardNumber_bytes,expMonth,expYear,cvc_bytes, callback, <void*>token_callback)
         print token_callback
-        utilToken.token = token_callback.decode('UTF-8')
+        util.token = token_callback.decode('UTF-8')
         print 'Debug 1'
-        print utilToken.token
+        print util.token
 
 
