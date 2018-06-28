@@ -2,7 +2,7 @@ STUFF = "Hi"
 __all__ = ['StripeWrapper']
 
 cdef extern from "stripe_ios_imp.h":
-    ctypedef void *tokenfunc(char *name, void *user_data)
+    ctypedef void (*tokenfunc)(char *name, void *user_data)
     void retrieveToken(char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc,tokenfunc user_func, void *user_data)
 
 def getToken(self,util,myKey,cardNumber,expMonth,expYear,cvc):
