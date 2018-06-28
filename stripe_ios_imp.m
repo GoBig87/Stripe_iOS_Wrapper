@@ -5,16 +5,9 @@
 #import <Foundation/NSError.h>
 #import <Foundation/NSString.h>
 
-class StripeWrapper {
-public:
-    StripeWrapper();
-    ~StripeWrapper();
-    void retrieveToken(char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc,tokenfunc callback_func,void *user_data);
-};
-StripeWrapper::StripeWrapper(){
-}
+#include "stripe_ios_imp.h"
 
-void StripeWrapper::retrieveToken(char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc,tokenfunc callback_func,void *user_data){
+void retrieveToken(char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc,tokenfunc callback_func,void *user_data){
 
     NSString* NScardNumber = [NSString stringWithUTF8String:cardNumber];
     NSString* NScvc = [NSString stringWithUTF8String:cvc];
@@ -39,15 +32,3 @@ void StripeWrapper::retrieveToken(char* myKey, char* cardNumber, int expMonth, i
     }];
 }
 
-//
-// C-like API for easier interaction with Cython
-//
-
-#include "stripe_ios_imp.h"
-
-stripe_wrapper_t stripe_wrapper_init() {
-    return new StripeWrapper();
-}
-void stripe_get_token(stripe_wrapper_t stripe, char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc,tokenfunc callback_func,void *user_data){
-    return ((StripeWrapper *)stripe)->retrieveToken(myKey,cardNumber,expMonth,expYear,cvc,callback_func,user_data);
-}
