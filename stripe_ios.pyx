@@ -31,7 +31,7 @@ class StripeWrapper():
         print cvc_string
         cdef char* token_callback
 
-        retrieveToken(myKey_bytes,cardNumber_bytes,expMonth,expYear,cvc_bytes, callback, <void*>token_callback)
+        retrieveToken(callback, myKey_bytes, cardNumber_bytes, expMonth, expYear, cvc_bytes, <void*>token_callback)
         print token_callback
         util.token = token_callback.decode('UTF-8')
         print 'Debug 1'
