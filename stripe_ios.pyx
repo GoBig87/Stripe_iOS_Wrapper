@@ -5,7 +5,7 @@ cdef extern from "stripe_ios_imp.h":
     ctypedef void *stripe_wrapper_t
     ctypedef void (*tokenfunc)(char *name, void *user_data)
     strip_wrapper_t stripe_wrapper_init()
-    void stripe_get_token(stripe_wrapper_t stripe, char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc,tokenfunc callback_func,void *user_data)
+    void stripe_get_token(stripe_wrapper_t stripe, char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc,tokenfunc callback_func,void* user_data)
 
 cdef void callback(char *name, void *f):
     (<object>f)(name.decode('utf-8'))

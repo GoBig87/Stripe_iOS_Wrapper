@@ -5,16 +5,16 @@
 #import <Foundation/NSError.h>
 #import <Foundation/NSString.h>
 
-class StripWrapper {
+class StripeWrapper {
 public:
-    StripWrapper();
-    ~StripWrapper();
+    StripeWrapper();
+    ~StripeWrapper();
     void retrieveToken(char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc,tokenfunc callback_func,void *user_data);
 };
-StripWrapper::StripWrapper(){
+StripeWrapper::StripeWrapper(){
 }
 
-void StripWrapper::retrieveToken(char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc,tokenfunc callback_func,void *user_data){
+void StripeWrapper::retrieveToken(char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc,tokenfunc callback_func,void *user_data){
 
     NSString* NScardNumber = [NSString stringWithUTF8String:cardNumber];
     NSString* NScvc = [NSString stringWithUTF8String:cvc];
@@ -45,9 +45,9 @@ void StripWrapper::retrieveToken(char* myKey, char* cardNumber, int expMonth, in
 
 #include "stripe_ios_imp.h"
 
-strip_wrapper_t stripe_wrapper_init() {
-    return new StripWrapper();
+stripe_wrapper_t stripe_wrapper_init() {
+    return new StripeWrapper();
 }
-void stripe_get_token(strip_wrapper_t stripe, char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc,tokenfunc callback_func,void *user_data){
-    return ((StripWrapper *)stripe)->retrieveToken(myKey,cardNumber,expMonth,expYear,cvc,callback_func,user_data);
+void stripe_get_token(stripe_wrapper_t stripe, char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc,tokenfunc callback_func,void *user_data){
+    return ((StripeWrapper *)stripe)->retrieveToken(myKey,cardNumber,expMonth,expYear,cvc,callback_func,user_data);
 }
