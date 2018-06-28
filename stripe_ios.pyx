@@ -5,7 +5,7 @@ cdef extern from "stripe_ios_imp.h":
     ctypedef void (*tokenfunc)(const char *name, void *user_data)
     void retrieveToken(char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc,tokenfunc user_func, void *user_data)
 
-def getToken(self,util,myKey,cardNumber,expMonth,expYear,cvc):
+def getToken(self,utilToken,myKey,cardNumber,expMonth,expYear,cvc):
 
     cdef bytes myKey_bytes = myKey.encode('utf-8')
     cdef char* myKey_string = myKey_bytes
@@ -21,9 +21,9 @@ def getToken(self,util,myKey,cardNumber,expMonth,expYear,cvc):
     print cardNumber_string
     print cvc_string
 
-    retrieveToken(myKey_bytes, cardNumber_bytes, expMonth, expYear, cvc_bytes, callback, <void*>util)
+    retrieveToken(myKey_bytes, cardNumber_bytes, expMonth, expYear, cvc_bytes, callback, <void*>utilToken)
     print 'Debug 1'
-    print util.token
+    print utilToken
 
-cdef void callback(const char *name, void *util):
+cdef void callback(const char *name, void *utilToken):
     (<object>util)(name.decode('utf-8'))
