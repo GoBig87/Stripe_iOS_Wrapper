@@ -11,8 +11,8 @@ class StripeWrapper():
         foo = 'bar'
         pass
 
-    def getToken(utilToken,myKey,cardNumber,expMonth,expYear,cvc):
-    
+    def getToken(self,utilToken,myKey,cardNumber,expMonth,expYear,cvc):
+
         cdef bytes myKey_bytes = myKey.encode('utf-8')
         cdef char* myKey_string = myKey_bytes
         cdef bytes cardNumber_bytes = cardNumber.encode('utf-8')
