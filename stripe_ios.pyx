@@ -26,4 +26,4 @@ def getToken(self,utilToken,myKey,cardNumber,expMonth,expYear,cvc):
     print utilToken
 
 cdef void callback(const char *name, void *utilToken):
-    (<object>util)(name.decode('utf-8'))
+    (<object>utilToken)(name.decode('utf-8'))
