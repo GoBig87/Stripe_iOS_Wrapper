@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ade1a464-83d9-4d73-a4de-fe42eccf7b89" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/stripe_ios.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/stripe_ios.pyx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stripe_ios_imp.h" beforeDir="false" afterPath="$PROJECT_DIR$/stripe_ios_imp.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stripe_ios_imp.m" beforeDir="false" afterPath="$PROJECT_DIR$/stripe_ios_imp.m" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -28,8 +25,8 @@
       <file leaf-file-name="stripe_ios.pyx" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/stripe_ios.pyx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+            <state relative-caret-position="174">
+              <caret line="17" column="4" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -532,8 +529,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/stripe_ios.pyx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        <state relative-caret-position="174">
+          <caret line="17" column="4" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="4" />
         </state>
       </provider>
     </entry>

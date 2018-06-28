@@ -13,6 +13,9 @@ cdef class _Stripe:
     def __cinit__(self):
         self.stripe = NULL
 
+cdef void callback(char *name, void *f):
+    (<object>f)(name.decode('utf-8'))
+    
 class StripeWrapper():
 
     def __init__(self,**kwargs):
@@ -44,5 +47,3 @@ class StripeWrapper():
         print utilToken.token
 
 
-    cdef void callback(char *name, void *f):
-        (<object>f)(name.decode('utf-8'))
