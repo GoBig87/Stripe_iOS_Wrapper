@@ -67,9 +67,9 @@
       <find>NSInteger</find>
       <find>StripeDomain</find>
       <find>STP_ERROR_ENUM</find>
+      <find>stripe_wrapper_t</find>
       <find>callback</find>
       <find>tokenfunc</find>
-      <find>stripe_wrapper_t</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -85,7 +85,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
+  <component name="ProjectFrameBounds">
     <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="823" />
