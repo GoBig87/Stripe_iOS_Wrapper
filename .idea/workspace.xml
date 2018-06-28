@@ -68,8 +68,9 @@
       <find>NSInteger</find>
       <find>StripeDomain</find>
       <find>STP_ERROR_ENUM</find>
-      <find>stripe_wrapper_t</find>
+      <find>callback</find>
       <find>tokenfunc</find>
+      <find>stripe_wrapper_t</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
