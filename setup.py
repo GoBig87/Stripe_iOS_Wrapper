@@ -81,7 +81,6 @@ osx_flags = {
 sources['stripe_ios.pyx'] = merge(base_flags, osx_flags)
 
 ext_modules = get_extensions_from_sources(sources)
-ext_modules.append(Extension("stripe_ios", ["stripe_ios.pyx", "stripe_ios.c"]))
 
 setup(
       name='stripe_ios',
