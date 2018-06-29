@@ -29,16 +29,17 @@
     [apiClient createTokenWithCard:cardParams completion:^(STPToken *token,NSError *error) {
         NSLog(@"DEBUG_STRIPE3");
         if (token == nil || error != nil) {
-            NSLog(@"ERROR");
+            NSLog(@"ERROR1");
             const char* errorChar = [error.localizedDescription UTF8String];
             user_func(errorChar,user_data);
-            NSLog(@"ERROR");
+            NSLog(@"ERROR2");
             NSLog(@"%@",error.localizedDescription);
         } else {
             NSLog(@"Success");
             const char* tokenChar = [token.tokenId UTF8String];
+            NSLog(@"Success2");
             user_func(tokenChar,user_data);
-            NSLog(@"Success");
+            NSLog(@"Success3");
             NSLog(@"%@",token.tokenId);
         }
     }];
