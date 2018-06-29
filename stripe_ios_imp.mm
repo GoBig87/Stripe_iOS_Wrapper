@@ -11,16 +11,17 @@ void retrieveToken(char* myKey, char* cardNumber, int expMonth, int expYear, cha
 
     NSString* NScardNumber = [NSString stringWithUTF8String:cardNumber];
     NSString* NScvc = [NSString stringWithUTF8String:cvc];
-
+    NSLog(NScardNumber);
+    NSLog(NScvc);
     STPCardParams *cardParams = [[STPCardParams alloc] init];
     cardParams.number = NScardNumber;
     cardParams.expMonth = expMonth;
     cardParams.expYear = expYear;
     cardParams.cvc = NScvc;
-
+    NSLog(@"DEBUG_STRIPE1");
     NSString *myPublishableKey = [NSString stringWithUTF8String:myKey];
     STPAPIClient *sharedClient = [[STPAPIClient alloc] initWithPublishableKey:myPublishableKey];
-
+    NSLog(@"DEBUG_STRIPE2");
     [sharedClient createTokenWithCard:cardParams completion:^(STPToken *token,NSError *error) {
         if (token == nil || error != nil) {
             NSLog(@"ERROR");
