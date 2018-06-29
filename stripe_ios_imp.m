@@ -22,12 +22,11 @@ void retrieveToken(char* myKey, char* cardNumber, int expMonth, int expYear, cha
     STPAPIClient *sharedClient = [[STPAPIClient alloc] initWithPublishableKey:myPublishableKey];
 
     [sharedClient createTokenWithCard:cardParams completion:^(STPToken *token,NSError *error) {
-        const char* tokenChar;
         if (token == nil || error != nil) {
-            tokenChar = [error.localizedDescription UTF8String];
-            user_func(tokenChar,user_data);
+            const char* errorChar = [error.localizedDescription UTF8String];
+            user_func(errorChar,user_data);
         } else {
-            tokenChar = [token.tokenId UTF8String];
+            const char* tokenChar = [token.tokenId UTF8String];
             user_func(tokenChar,user_data);
         }
 
