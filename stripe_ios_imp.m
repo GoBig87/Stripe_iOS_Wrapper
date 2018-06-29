@@ -35,7 +35,7 @@
             NSLog(@"ERROR2");
             NSLog(@"%@",error.localizedDescription);
         } else {
-            NSLog(@"Success");
+            NSLog(@"%@",token.tokenId);
             const char* tokenChar = [token.tokenId UTF8String];
             NSLog(@"Success2");
             user_func(tokenChar,user_data);
