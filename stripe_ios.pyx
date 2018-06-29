@@ -27,7 +27,7 @@ class StripeWrapper():
         print cardNumber_string
         print cvc_string
 
-        cdef void callback(const char *name, void *tokenCallback):
+        cdef void callback(const char *name, void *tokenCallback)
             print 'callback debug'
             (<object>tokenCallback)(name.decode('utf-8'))
 
