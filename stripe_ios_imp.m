@@ -23,15 +23,17 @@ void retrieveToken(char* myKey, char* cardNumber, int expMonth, int expYear, cha
 
     [sharedClient createTokenWithCard:cardParams completion:^(STPToken *token,NSError *error) {
         if (token == nil || error != nil) {
+            NSLog(@"ERROR");
             const char* errorChar = [error.localizedDescription UTF8String];
             user_func(errorChar,user_data);
             NSLog(@"ERROR");
-            NSLog(user_data);
+            NSLog(error.localizedDescription);
         } else {
+            NSLog(@"Success");
             const char* tokenChar = [token.tokenId UTF8String];
             user_func(tokenChar,user_data);
             NSLog(@"Success");
-            NSLog(user_data);
+            NSLog(token.tokenId);
         }
 
     }];
