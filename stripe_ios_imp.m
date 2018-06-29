@@ -25,12 +25,12 @@ void retrieveToken(char* myKey, char* cardNumber, int expMonth, int expYear, cha
         if (token == nil || error != nil) {
             const char* errorChar = [error.localizedDescription UTF8String];
             user_func(errorChar,user_data);
-            NSLog('ERROR');
+            NSLog(@"ERROR");
             NSLog(user_data);
         } else {
             const char* tokenChar = [token.tokenId UTF8String];
             user_func(tokenChar,user_data);
-            NSLog('Success');
+            NSLog(@"Success");
             NSLog(user_data);
         }
 
