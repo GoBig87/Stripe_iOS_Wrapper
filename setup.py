@@ -76,7 +76,7 @@ src_path = build_path = dirname(__file__)
 base_flags = determine_base_flags()
 osx_flags = {
     'extra_link_args': ['-framework', 'Stripe'],
-    'extra_compile_args': ['-ObjC++'],
+    'extra_compile_args': ['-ObjC'],
     'depends': ['stripe_ios_imp.m','stripe_ios_c.m']}
 sources['stripe_ios.pyx'] = merge(base_flags, osx_flags)
 
