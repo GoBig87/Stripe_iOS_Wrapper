@@ -31,4 +31,5 @@ class StripeWrapper():
         print 'Debug 1'
 
 cdef void callback(const char *name, void *tokenCallback):
+    print 'callback debug'
     (<object>tokenCallback)(name.decode('utf-8'))
