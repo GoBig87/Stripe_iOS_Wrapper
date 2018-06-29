@@ -8,10 +8,9 @@ cdef extern from "stripe_ios_c.h":
 class StripeWrapper():
 
     def __init__(self,**kwargs):
-        cdef char* tokenCallback
-        self.tokenCallback = tokenCallback
+        pass
 
-    def getToken(self,utilToken,myKey,cardNumber,expMonth,expYear,cvc):
+    def getToken(self,tokenCallback,myKey,cardNumber,expMonth,expYear,cvc):
 
         cdef bytes myKey_bytes = myKey.encode('utf-8')
         cdef char* myKey_string = myKey_bytes
@@ -27,8 +26,8 @@ class StripeWrapper():
         print cardNumber_string
         print cvc_string
 
-        retrieveToken(myKey_bytes, cardNumber_bytes, expMonth, expYear, cvc_bytes, callback, <void*>utilToken)
+        retrieveToken(myKey_bytes, cardNumber_bytes, expMonth, expYear, cvc_bytes, callback, <void*>tokenCallback)
         print 'Debug 1'
 
-cdef void callback(const char *name, void *utilToken):
-    (<object>utilToken)(name.decode('utf-8'))
+cdef void callback(const char *name, void *tokenCallback):
+    (<object>tokenCallback)(name.decode('utf-8'))
