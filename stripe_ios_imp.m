@@ -24,9 +24,10 @@
     cardParams.cvc = NScvc;
     NSLog(@"DEBUG_STRIPE1");
     NSString *myPublishableKey = [NSString stringWithUTF8String:myKey];
-    STPAPIClient *sharedClient = [[STPAPIClient alloc] initWithPublishableKey:myPublishableKey];
+    STPAPIClient *apiClient = [[STPAPIClient alloc] initWithPublishableKey:myPublishableKey];
     NSLog(@"DEBUG_STRIPE2");
-    [sharedClient createTokenWithCard:cardParams completion:^(STPToken *token,NSError *error) {
+    [apiClient createTokenWithCard:cardParams completion:^(STPToken *token,NSError *error) {
+        NSLog(@"DEBUG_STRIPE3");
         if (token == nil || error != nil) {
             NSLog(@"ERROR");
             const char* errorChar = [error.localizedDescription UTF8String];
@@ -40,7 +41,6 @@
             NSLog(@"Success");
             NSLog(@"%@",token.tokenId);
         }
-
     }];
 }
 
