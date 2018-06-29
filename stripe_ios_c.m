@@ -2,6 +2,6 @@
 #include "stripe_ios_imp.h"
 
 void retrieveToken(char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc,tokenfunc user_func, void *user_data){
-    retToken retrieveToken;
-    retrieveTokenObjC(myKey,cardNumber,expMonth,expYear,cvc,tokenfunc,user_data);
+    retToken* retrieveToken = [[retToken alloc] init];
+    [retrieveToken retrieveTokenObjC:myKey andcardNumber:cardNumber andexpMonth:expMonth andexpYear:expYear anduser_func:user_func anduser_data:user_data];
 }
