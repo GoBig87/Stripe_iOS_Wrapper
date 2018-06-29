@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ade1a464-83d9-4d73-a4de-fe42eccf7b89" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/stripe_ios_c.m" beforeDir="false" afterPath="$PROJECT_DIR$/stripe_ios_c.m" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,7 +17,7 @@
         <entry file="file://$PROJECT_DIR$/stripe_ios_imp.h">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="15">
-              <caret line="1" column="13" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="13" />
+              <caret line="1" column="24" selection-start-line="1" selection-start-column="24" selection-end-line="1" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -58,20 +58,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="stripe_ios_imp.m" pinned="false" current-in-tab="true">
+      <file leaf-file-name="stripe_ios_imp.m" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stripe_ios_imp.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="91">
-              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="12" />
+            <state relative-caret-position="151">
+              <caret line="15" column="26" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="26" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="setup.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="setup.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/setup.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="915">
-              <caret line="66" column="40" selection-start-line="66" selection-start-column="40" selection-end-line="66" selection-end-column="40" />
+            <state relative-caret-position="195">
+              <caret line="78" column="35" selection-start-line="78" selection-start-column="35" selection-end-line="78" selection-end-column="35" />
               <folding>
                 <element signature="e#46#55#0" expanded="true" />
               </folding>
@@ -109,11 +109,11 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/stripe_ios_c.h" />
-        <option value="$PROJECT_DIR$/setup.py" />
         <option value="$PROJECT_DIR$/stripe_ios_imp.m" />
         <option value="$PROJECT_DIR$/stripe_ios.pyx" />
-        <option value="$PROJECT_DIR$/stripe_ios_imp.h" />
         <option value="$PROJECT_DIR$/stripe_ios_c.m" />
+        <option value="$PROJECT_DIR$/stripe_ios_imp.h" />
+        <option value="$PROJECT_DIR$/setup.py" />
       </list>
     </option>
   </component>
@@ -133,11 +133,6 @@
             <path>
               <item name="Stripe_iOS_Wrapper" type="b2602c69:ProjectViewProjectNode" />
               <item name="Stripe_iOS_Wrapper" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Stripe_iOS_Wrapper" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Stripe_iOS_Wrapper" type="462c0819:PsiDirectoryNode" />
-              <item name="Stripe" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -482,23 +477,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/setup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="915">
-          <caret line="66" column="40" selection-start-line="66" selection-start-column="40" selection-end-line="66" selection-end-column="40" />
-          <folding>
-            <element signature="e#46#55#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/stripe_ios_imp.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="13" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Stripe/STPCardParams.m">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -527,10 +505,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/stripe_ios_imp.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="24" selection-start-line="1" selection-start-column="24" selection-end-line="1" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/stripe_ios_imp.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="91">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="12" />
+        <state relative-caret-position="151">
+          <caret line="15" column="26" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="78" column="35" selection-start-line="78" selection-start-column="35" selection-end-line="78" selection-end-column="35" />
+          <folding>
+            <element signature="e#46#55#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
