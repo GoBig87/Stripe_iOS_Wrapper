@@ -8,6 +8,7 @@ cdef extern from "stripe_ios_c.h":
 class StripeWrapper():
 
     def __init__(self,**kwargs):
+        foo = 'bar'
         pass
 
     def getToken(self,tokenCallback,myKey,cardNumber,expMonth,expYear,cvc):
