@@ -29,7 +29,7 @@ class StripeWrapper():
         retrieveToken(myKey_bytes, cardNumber_bytes, expMonth, expYear, cvc_bytes, callback, <void*>tokenCallback)
         print 'Debug 1'
 
-cdef void callback(const char *name, void *tokenCallback)
-    print 'callback debug'
-    (< object > tokenCallback)(name.decode('utf-8'))
+        cdef void callback(self,const char *name, void *tokenCallback):
+            print 'callback debug'
+            (< object > tokenCallback)(name.decode('utf-8'))
 
