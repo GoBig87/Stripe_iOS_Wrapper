@@ -15,8 +15,8 @@
 
     NSString* NScardNumber = [NSString stringWithUTF8String:cardNumber];
     NSString* NScvc = [NSString stringWithUTF8String:cvc];
-    NSLog(NScardNumber);
-    NSLog(NScvc);
+    NSLog(@"%@",NScardNumber);
+    NSLog(@"%@",NScvc);
     STPCardParams *cardParams = [[STPCardParams alloc] init];
     cardParams.number = NScardNumber;
     cardParams.expMonth = expMonth;
@@ -32,13 +32,13 @@
             const char* errorChar = [error.localizedDescription UTF8String];
             user_func(errorChar,user_data);
             NSLog(@"ERROR");
-            NSLog(error.localizedDescription);
+            NSLog(@"%@",error.localizedDescription);
         } else {
             NSLog(@"Success");
             const char* tokenChar = [token.tokenId UTF8String];
             user_func(tokenChar,user_data);
             NSLog(@"Success");
-            NSLog(token.tokenId);
+            NSLog(@"%@",token.tokenId);
         }
 
     }];
