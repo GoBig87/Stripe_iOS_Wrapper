@@ -1,5 +1,4 @@
 STUFF = "Hi"
-__all__ = ['StripeWrapper']
 
 cdef extern from "stripe_ios_c.h":
     ctypedef void (*tokenfunc)(const char *name, void *user_data)
