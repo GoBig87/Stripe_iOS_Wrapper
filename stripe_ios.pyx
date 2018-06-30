@@ -23,4 +23,4 @@ def getToken(tokenCallback,myKey,cardNumber,expMonth,expYear,cvc):
     print 'Debug 1'
 
 cdef void callback(const char * name, void *tokenCallback):
-    (< object > tokenCallback.token)(name.decode('utf-8'))
+    (< object > tokenCallback)(name.decode('utf-8'))
