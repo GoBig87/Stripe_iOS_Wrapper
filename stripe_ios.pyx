@@ -1,15 +1,27 @@
 STUFF = "Hi"
-__all__ = ['StripeWrapper']
 
-cdef extern from "stripe_ios.h":
-    ctypedef void *strip_wrapper_t
-    strip_wrapper_t stripe_wrapper_init()
-    const char stripe_get_token(int cardNumber, int expMonth, int expYear,int cvc)
+cdef extern from "stripe_ios_c.h":
+    ctypedef void (*tokenfunc)(const char *name, void *user_data)
+    void retrieveToken(char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc,tokenfunc user_func, void *user_data)
 
-class StripeWrapper():
+def getToken(tokenCallback,myKey,cardNumber,expMonth,expYear,cvc):
 
-    def __cinit__(self,**kwargs):
-        super(StripeWrapper, self).__cinit__(**kwargs)
+    cdef bytes myKey_bytes = myKey.encode('utf-8')
+    cdef char* myKey_string = myKey_bytes
+    cdef bytes cardNumber_bytes = cardNumber.encode('utf-8')
+    cdef char* cardNumber_string = cardNumber_bytes
+    cdef bytes cvc_bytes = cvc.encode('utf-8')
+    cdef char* cvc_string = cvc_bytes
 
-    def getToken(self,cardNumber,expMonth,expYear,cvc):
-        self.token = stripe_get_token(cardNumber,expMonth,expYear,cvc)
+    print myKey_bytes
+    print cardNumber_bytes
+    print cvc_bytes
+    print myKey_string
+    print cardNumber_string
+    print cvc_string
+
+    retrieveToken(myKey_bytes, cardNumber_bytes, expMonth, expYear, cvc_bytes, callback, <void*>tokenCallback)
+    print 'Debug 1'
+
+cdef void callback(const char *name, void *tokenCallback):
+    (<object> tokenCallback).token = (name.decode('utf-8'))
