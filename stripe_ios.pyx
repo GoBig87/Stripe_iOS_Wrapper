@@ -19,6 +19,7 @@ def getToken(tokenCallback,myKey,cardNumber,expMonth,expYear,cvc):
     print myKey_string
     print cardNumber_string
     print cvc_string
+    tokenCallback('hello')
     retrieveToken(myKey_bytes, cardNumber_bytes, expMonth, expYear, cvc_bytes, callback, <void*>tokenCallback)
     print 'Debug 1'
 
