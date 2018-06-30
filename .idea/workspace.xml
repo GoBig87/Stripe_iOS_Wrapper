@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ade1a464-83d9-4d73-a4de-fe42eccf7b89" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stripe_ios_imp.h" beforeDir="false" afterPath="$PROJECT_DIR$/stripe_ios_imp.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/stripe_ios.pyx" beforeDir="false" afterPath="$PROJECT_DIR$/stripe_ios.pyx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/stripe_ios_imp.m" beforeDir="false" afterPath="$PROJECT_DIR$/stripe_ios_imp.m" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,8 +18,8 @@
       <file leaf-file-name="stripe_ios_imp.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stripe_ios_imp.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
+            <state relative-caret-position="15">
+              <caret line="1" column="24" selection-start-line="1" selection-start-column="15" selection-end-line="1" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -34,11 +33,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="stripe_ios.pyx" pinned="false" current-in-tab="false">
+      <file leaf-file-name="stripe_ios.pyx" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/stripe_ios.pyx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" column="110" lean-forward="true" selection-start-line="22" selection-start-column="110" selection-end-line="22" selection-end-column="110" />
+            <state relative-caret-position="390">
+              <caret line="26" column="59" lean-forward="true" selection-start-line="26" selection-start-column="59" selection-end-line="26" selection-end-column="59" />
             </state>
           </provider>
         </entry>
@@ -46,8 +45,8 @@
       <file leaf-file-name="stripe_ios_c.m" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stripe_ios_c.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" selection-start-line="3" selection-end-line="7" selection-end-column="1" />
+            <state relative-caret-position="60">
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
             </state>
           </provider>
         </entry>
@@ -55,17 +54,17 @@
       <file leaf-file-name="stripe_ios_imp.m" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/stripe_ios_imp.m">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="604">
-              <caret line="46" selection-start-line="46" selection-end-line="46" />
+            <state relative-caret-position="409">
+              <caret line="38" column="43" lean-forward="true" selection-start-line="38" selection-start-column="43" selection-end-line="38" selection-end-column="43" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="setup.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="setup.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/setup.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="489">
-              <caret line="79" column="34" lean-forward="true" selection-start-line="79" selection-start-column="34" selection-end-line="79" selection-end-column="34" />
+            <state relative-caret-position="1110">
+              <caret line="79" column="34" selection-start-line="79" selection-start-column="34" selection-end-line="79" selection-end-column="34" />
               <folding>
                 <element signature="e#46#55#0" expanded="true" />
               </folding>
@@ -103,11 +102,11 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/stripe_ios_c.h" />
-        <option value="$PROJECT_DIR$/stripe_ios.pyx" />
-        <option value="$PROJECT_DIR$/stripe_ios_c.m" />
         <option value="$PROJECT_DIR$/stripe_ios_imp.h" />
-        <option value="$PROJECT_DIR$/stripe_ios_imp.m" />
         <option value="$PROJECT_DIR$/setup.py" />
+        <option value="$PROJECT_DIR$/stripe_ios_c.m" />
+        <option value="$PROJECT_DIR$/stripe_ios_imp.m" />
+        <option value="$PROJECT_DIR$/stripe_ios.pyx" />
       </list>
     </option>
   </component>
@@ -121,6 +120,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -132,7 +132,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -478,10 +477,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/stripe_ios.pyx">
+    <entry file="file://$PROJECT_DIR$/setup.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="110" lean-forward="true" selection-start-line="22" selection-start-column="110" selection-end-line="22" selection-end-column="110" />
+        <state relative-caret-position="1110">
+          <caret line="79" column="34" selection-start-line="79" selection-start-column="34" selection-end-line="79" selection-end-column="34" />
+          <folding>
+            <element signature="e#46#55#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -494,32 +496,29 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/stripe_ios_imp.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
+        <state relative-caret-position="15">
+          <caret line="1" column="24" selection-start-line="1" selection-start-column="15" selection-end-line="1" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/stripe_ios_c.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" selection-start-line="3" selection-end-line="7" selection-end-column="1" />
+        <state relative-caret-position="60">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/stripe_ios_imp.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="604">
-          <caret line="46" selection-start-line="46" selection-end-line="46" />
+        <state relative-caret-position="409">
+          <caret line="38" column="43" lean-forward="true" selection-start-line="38" selection-start-column="43" selection-end-line="38" selection-end-column="43" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/setup.py">
+    <entry file="file://$PROJECT_DIR$/stripe_ios.pyx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="489">
-          <caret line="79" column="34" lean-forward="true" selection-start-line="79" selection-start-column="34" selection-end-line="79" selection-end-column="34" />
-          <folding>
-            <element signature="e#46#55#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="390">
+          <caret line="26" column="59" lean-forward="true" selection-start-line="26" selection-start-column="59" selection-end-line="26" selection-end-column="59" />
         </state>
       </provider>
     </entry>
