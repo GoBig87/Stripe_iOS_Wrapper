@@ -77,7 +77,7 @@ base_flags = determine_base_flags()
 osx_flags = {
     'extra_link_args': ['-framework', 'Stripe'],
     'extra_compile_args': ['-ObjC++'],
-    'depends': ['stripe.m']}
+    'depends': ['stripe_c.m']}
 sources['stripe.pyx'] = merge(base_flags, osx_flags)
 
 ext_modules = get_extensions_from_sources(sources)
