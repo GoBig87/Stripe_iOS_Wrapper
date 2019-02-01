@@ -5,7 +5,7 @@
 #import <Foundation/NSError.h>
 #import <Foundation/NSString.h>
 
-#include "stripe.h"
+#include "stripe_c.h"
 
 @implementation retToken
 
