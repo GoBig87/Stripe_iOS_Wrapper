@@ -1,6 +1,6 @@
 STUFF = "Hi"
 
-cdef extern from "stripe_ios_imp.h":
+cdef extern from "stripe.h":
     ctypedef void (*tokenfunc)(const char *name, void *user_data)
     void retrieveToken(char* myKey, char* cardNumber, int expMonth, int expYear, char* cvc,tokenfunc user_func, void *user_data)
 
