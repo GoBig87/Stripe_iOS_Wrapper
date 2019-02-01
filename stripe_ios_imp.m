@@ -13,32 +13,20 @@
 
     NSString* NScardNumber = [NSString stringWithUTF8String:cardNumber];
     NSString* NScvc = [NSString stringWithUTF8String:cvc];
-    NSLog(@"%@",NScardNumber);
-    NSLog(@"%@",NScvc);
     STPCardParams *cardParams = [[STPCardParams alloc] init];
     cardParams.number = NScardNumber;
     cardParams.expMonth = expMonth;
     cardParams.expYear = expYear;
     cardParams.cvc = NScvc;
-    NSLog(@"DEBUG_STRIPE1");
     NSString *myPublishableKey = [NSString stringWithUTF8String:myKey];
     STPAPIClient *apiClient = [[STPAPIClient alloc] initWithPublishableKey:myPublishableKey];
-    NSLog(@"DEBUG_STRIPE2");
     [apiClient createTokenWithCard:cardParams completion:^(STPToken *token,NSError *error) {
-        NSLog(@"DEBUG_STRIPE3");
         if (token == nil || error != nil) {
-            NSLog(@"ERROR1");
             const char* errorChar = [error.localizedDescription UTF8String];
             user_func(errorChar,user_data);
-            NSLog(@"ERROR2");
-            NSLog(@"%@",error.localizedDescription);
         } else {
-            NSLog(@"%@",token.tokenId);
             const char* tokenChar = [token.tokenId UTF8String];
-            NSLog(@"Success2");
             user_func(tokenChar,user_data);
-            NSLog(@"Success3");
-            NSLog(@"%@",token.tokenId);
         }
     }];
 }
