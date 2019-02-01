@@ -13,13 +13,6 @@ def getToken(tokenCallback,myKey,cardNumber,expMonth,expYear,cvc):
     cdef bytes cvc_bytes = cvc.encode('utf-8')
     cdef char* cvc_string = cvc_bytes
 
-    print myKey_bytes
-    print cardNumber_bytes
-    print cvc_bytes
-    print myKey_string
-    print cardNumber_string
-    print cvc_string
-
     retrieveToken(myKey_bytes, cardNumber_bytes, expMonth, expYear, cvc_bytes, callback, <void*>tokenCallback)
 
 cdef void callback(const char *name, void *tokenCallback):

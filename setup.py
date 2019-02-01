@@ -62,7 +62,7 @@ def get_extensions_from_sources(sources):
         depends = [expand(src_path, x) for x in flags.pop('depends', [])]
         f_depends = [x for x in depends if x.rsplit('.', 1)[-1] in ('m')]
         c_depends = [expand(src_path, x) for x in flags.pop('c_depends', [])]
-        module_name = 'stripe_ios'
+        module_name = 'stripe'
         flags_clean = {'depends': depends}
         for key, value in flags.items():
             if len(value):
@@ -77,13 +77,13 @@ base_flags = determine_base_flags()
 osx_flags = {
     'extra_link_args': ['-framework', 'Stripe'],
     'extra_compile_args': ['-ObjC++'],
-    'depends': ['stripe_ios_imp.m']}
-sources['stripe_ios.pyx'] = merge(base_flags, osx_flags)
+    'depends': ['stripe.m']}
+sources['stripe.pyx'] = merge(base_flags, osx_flags)
 
 ext_modules = get_extensions_from_sources(sources)
 
 setup(
-      name='stripe_ios',
+      name='stripe',
       version='0.1',
       description="A simple stripe ios wrapper",
       classifiers=[
