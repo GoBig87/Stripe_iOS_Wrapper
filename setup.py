@@ -104,9 +104,7 @@ setup(
       ext_modules=ext_modules,
       include_package_data=True,
       zip_safe=False,
-      setup_requires=[
-                      'host_setuptools',
-                      ],
+      setup_requires=[],
       
       )
 
